@@ -1,0 +1,47 @@
+.row {
+  width: 100%;
+  max-width: 100%;
+}
+
+ul {
+  height: 100%;
+}
+
+#second-navbar #snb-left #logo {
+  max-height: 60px;
+}
+
+#second-navbar #snb-center {
+  font-size: 1rem;
+  font-weight: bolder;
+}
+
+#second-navbar #snb-center .dropdown-menu {
+  background-color: #f8fafc;
+  top: 140%;
+}
+
+#second-navbar #snb-center .dropdown-menu span {
+  font-size: 1rem;
+  font-weight: bolder;
+  color: #9561e2;
+}
+
+#second-navbar #snb-center .dropdown-menu a {
+  padding-left: 2.5rem;
+}
+
+#second-navbar #snb-center .dropdown-menu a:hover {
+  background-color: #edf2f7;
+}
+
+#second-navbar #snb-right ul {
+  max-width: 100%;
+}
+
+#second-navbar #snb-right .icon-prop {
+  max-height: 30px;
+  margin: 0 5px;
+  color: gray;
+}
+

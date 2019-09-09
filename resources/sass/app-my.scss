@@ -1,0 +1,78 @@
+@import 'variables';
+
+.row {
+    width: 100%;
+    max-width: 100%;
+}
+
+ul {
+    height: 100%;
+}
+
+// First Navbar
+#first-navbar {
+
+    #fnb-left {
+
+    }
+
+    #fnb-right {
+
+    }
+
+}
+
+
+// Second Navbar
+#second-navbar {
+
+    #snb-left {
+
+        #logo {
+            max-height: 60px;
+        }
+    }
+
+    #snb-center {
+        font-size: 1rem;
+        font-weight: bolder;
+
+
+        // Выпадающее меню
+        .dropdown-menu {
+            background-color: $body-bg;
+            top: 140%;
+
+            span {
+                font-size: 1rem;
+                font-weight: bolder;
+                color: $purple;
+            }
+
+            a {
+                padding-left: 2.5rem;
+
+                &:hover {
+                    background-color: darken($body-bg, 3%);
+                }
+            }
+        }
+    }
+
+    #snb-right {
+
+        ul {
+            max-width: 100%;
+        }
+
+        .icon-prop {
+            max-height: 30px;
+            margin: 0 5px;
+            color: gray;
+        }
+    }
+
+}
+
+
+
