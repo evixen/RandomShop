@@ -12,7 +12,6 @@ ul {
 }
 
 #second-navbar #snb-center {
-  font-size: 1rem;
   font-weight: bolder;
 }
 
@@ -32,7 +31,7 @@ ul {
 }
 
 #second-navbar #snb-center .dropdown-menu a:hover {
-  background-color: #edf2f7;
+  background-color: #f1f5f9;
 }
 
 #second-navbar #snb-right ul {

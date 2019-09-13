@@ -34,7 +34,6 @@ ul {
     }
 
     #snb-center {
-        font-size: 1rem;
         font-weight: bolder;
 
 
@@ -53,7 +52,7 @@ ul {
                 padding-left: 2.5rem;
 
                 &:hover {
-                    background-color: darken($body-bg, 3%);
+                    background-color: darken($body-bg, 2%);
                 }
             }
         }

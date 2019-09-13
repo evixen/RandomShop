@@ -1,0 +1,98 @@
+<?php
+
+namespace App\Http\Controllers\Shop;
+
+use Illuminate\Http\Request;
+
+class CartController extends BaseController
+{
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+//        dd(\ShoppingCart::all());
+
+        return view('Shop.cart');
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Overtrue\LaravelShoppingCart\Exception
+     */
+    public function store(Request $request)
+    {
+        \ShoppingCart::add($request->id, $request->name, 1, $request->price, ['slug' => $request->slug]);
+        \ShoppingCart::associate('App\Models\ShopProduct');
+
+        return back()->with('success_message', 'Добавлено в корзину');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        //
+    }
+
+    public function delete($rawId)
+    {
+        \ShoppingCart::remove($rawId);
+
+        return back();
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function clean()
+    {
+        \ShoppingCart::destroy();
+
+        return back()->with('success_message', 'Корзина очищена');
+    }
+}

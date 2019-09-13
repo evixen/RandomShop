@@ -3,7 +3,7 @@
 
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 6.0.1 on 2019-09-07 20:20:41.
+ * Generated for Laravel 6.0.3 on 2019-09-11 10:57:34.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -14587,6 +14587,235 @@ namespace Illuminate\Support {
  
 }
 
+namespace Overtrue\LaravelShoppingCart { 
+
+    /**
+     * Facade for Laravel.
+     *
+     */ 
+    class Facade {
+        
+        /**
+         * Set the current cart name.
+         *
+         * @param string $name Cart name name
+         * @return \Overtrue\LaravelShoppingCart\Cart 
+         * @static 
+         */ 
+        public static function name($name)
+        {
+                        /** @var \Overtrue\LaravelShoppingCart\Cart $instance */
+                        return $instance->name($name);
+        }
+        
+        /**
+         * Associated model.
+         *
+         * @param string $model The name of the model
+         * @return \Overtrue\LaravelShoppingCart\Cart 
+         * @static 
+         */ 
+        public static function associate($model)
+        {
+                        /** @var \Overtrue\LaravelShoppingCart\Cart $instance */
+                        return $instance->associate($model);
+        }
+        
+        /**
+         * Get all items.
+         *
+         * @return \Illuminate\Support\Collection 
+         * @static 
+         */ 
+        public static function all()
+        {
+                        /** @var \Overtrue\LaravelShoppingCart\Cart $instance */
+                        return $instance->all();
+        }
+        
+        /**
+         * Add a row to the cart.
+         *
+         * @param int|string $id Unique ID of the item
+         * @param string $name Name of the item
+         * @param int $qty Item qty to add to the cart
+         * @param float $price Price of one item
+         * @param array $attributes Array of additional attributes, such as 'size' or 'color'...
+         * @return string 
+         * @static 
+         */ 
+        public static function add($id, $name = null, $qty = null, $price = null, $attributes = array())
+        {
+                        /** @var \Overtrue\LaravelShoppingCart\Cart $instance */
+                        return $instance->add($id, $name, $qty, $price, $attributes);
+        }
+        
+        /**
+         * Update the quantity of one row of the cart.
+         *
+         * @param string $rawId The __raw_id of the item you want to update
+         * @param int|array $attribute New quantity of the item|Array of attributes to update
+         * @return \Overtrue\LaravelShoppingCart\Item|bool 
+         * @static 
+         */ 
+        public static function update($rawId, $attribute)
+        {
+                        /** @var \Overtrue\LaravelShoppingCart\Cart $instance */
+                        return $instance->update($rawId, $attribute);
+        }
+        
+        /**
+         * Remove a row from the cart.
+         *
+         * @param string $rawId The __raw_id of the item
+         * @return bool 
+         * @static 
+         */ 
+        public static function remove($rawId)
+        {
+                        /** @var \Overtrue\LaravelShoppingCart\Cart $instance */
+                        return $instance->remove($rawId);
+        }
+        
+        /**
+         * Get a row of the cart by its ID.
+         *
+         * @param string $rawId The ID of the row to fetch
+         * @return \Overtrue\LaravelShoppingCart\Item 
+         * @static 
+         */ 
+        public static function get($rawId)
+        {
+                        /** @var \Overtrue\LaravelShoppingCart\Cart $instance */
+                        return $instance->get($rawId);
+        }
+        
+        /**
+         * Clean the cart.
+         *
+         * @return bool 
+         * @static 
+         */ 
+        public static function destroy()
+        {
+                        /** @var \Overtrue\LaravelShoppingCart\Cart $instance */
+                        return $instance->destroy();
+        }
+        
+        /**
+         * Alias of destory().
+         *
+         * @return bool 
+         * @static 
+         */ 
+        public static function clean()
+        {
+                        /** @var \Overtrue\LaravelShoppingCart\Cart $instance */
+                        return $instance->clean();
+        }
+        
+        /**
+         * Get the price total.
+         *
+         * @return float 
+         * @static 
+         */ 
+        public static function total()
+        {
+                        /** @var \Overtrue\LaravelShoppingCart\Cart $instance */
+                        return $instance->total();
+        }
+        
+        /**
+         * Return total price of cart.
+         *
+         * @return  
+         * @static 
+         */ 
+        public static function totalPrice()
+        {
+                        /** @var \Overtrue\LaravelShoppingCart\Cart $instance */
+                        return $instance->totalPrice();
+        }
+        
+        /**
+         * Get the number of items in the cart.
+         *
+         * @param bool $totalItems Get all the items (when false, will return the number of rows)
+         * @return int 
+         * @static 
+         */ 
+        public static function count($totalItems = true)
+        {
+                        /** @var \Overtrue\LaravelShoppingCart\Cart $instance */
+                        return $instance->count($totalItems);
+        }
+        
+        /**
+         * Get rows count.
+         *
+         * @return int 
+         * @static 
+         */ 
+        public static function countRows()
+        {
+                        /** @var \Overtrue\LaravelShoppingCart\Cart $instance */
+                        return $instance->countRows();
+        }
+        
+        /**
+         * Search if the cart has a item.
+         *
+         * @param array $search An array with the item ID and optional options
+         * @return array 
+         * @static 
+         */ 
+        public static function search($search)
+        {
+                        /** @var \Overtrue\LaravelShoppingCart\Cart $instance */
+                        return $instance->search($search);
+        }
+        
+        /**
+         * Get current cart name.
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function getName()
+        {
+                        /** @var \Overtrue\LaravelShoppingCart\Cart $instance */
+                        return $instance->getName();
+        }
+        
+        /**
+         * Get current associated model.
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function getModel()
+        {
+                        /** @var \Overtrue\LaravelShoppingCart\Cart $instance */
+                        return $instance->getModel();
+        }
+        
+        /**
+         * Return whether the shopping cart is empty.
+         *
+         * @return bool 
+         * @static 
+         */ 
+        public static function isEmpty()
+        {
+                        /** @var \Overtrue\LaravelShoppingCart\Cart $instance */
+                        return $instance->isEmpty();
+        }
+         
+    }
+ 
+}
+
 namespace Barryvdh\Debugbar { 
 
     /**
@@ -16098,7 +16327,7 @@ namespace  {
              * Execute the query and get the first result.
              *
              * @param array $columns
-             * @return \Illuminate\Database\Eloquent\Model|object|null 
+             * @return \Illuminate\Database\Eloquent\Model|object|static|null 
              * @static 
              */ 
             public static function first($columns = array())
@@ -18213,6 +18442,8 @@ namespace  {
     class Validator extends \Illuminate\Support\Facades\Validator {}
 
     class View extends \Illuminate\Support\Facades\View {}
+
+    class ShoppingCart extends \Overtrue\LaravelShoppingCart\Facade {}
 
     class Debugbar extends \Barryvdh\Debugbar\Facade {}
 

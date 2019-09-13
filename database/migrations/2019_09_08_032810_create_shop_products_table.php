@@ -19,7 +19,7 @@ class CreateShopProductsTable extends Migration
             $table->string('name')->unique();
             $table->string('slug')->unique();
             $table->text('details')->nullable();
-            $table->integer('price');
+            $table->float('price');
             $table->text('description')->nullable();
 
             $table->timestamps();
