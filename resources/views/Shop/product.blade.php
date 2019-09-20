@@ -34,6 +34,8 @@
                 <div class="product-price">{{ $product->price }} р.</div>
                 <br>
                 <div class="product-details">{{ $product->details }}</div>
+                <br>
+                <div class="product-details">{{ $product->category->title }}</div>
                 <br><br>
                 <form action="{{ route('cart.store') }}" method="post">
                     {{ csrf_field() }}

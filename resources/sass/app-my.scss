@@ -36,8 +36,11 @@ ul {
     #snb-center {
         font-weight: bolder;
 
-
         // Выпадающее меню
+        .pointer {
+            cursor: pointer;
+        }
+
         .dropdown-menu {
             background-color: $body-bg;
             top: 140%;

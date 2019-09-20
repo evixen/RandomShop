@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Shop;
 
 use App\Models\ShopProduct;
+use App\Models\ShopProductCategory;
 use Illuminate\Http\Request;
 
 class MainController extends BaseController
@@ -11,7 +12,9 @@ class MainController extends BaseController
     {
         $products = ShopProduct::inRandomOrder()->get();
 
-        return view('Shop.main', compact('products'));
+
+
+        return view('Shop.main', compact('products', 'menu'));
     }
 
     public function show($slug)

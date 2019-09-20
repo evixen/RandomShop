@@ -15,10 +15,11 @@ class CreateShopProductCategoriesTable extends Migration
     {
         Schema::create('shop_product_categories', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('parent_id')->unsigned()->default(1);
+            $table->integer('parent_id')->unsigned();
             $table->string('title')->unique();
             $table->string('slug')->unique();
             $table->text('description')->nullable();
+            $table->integer('menu_level');
 
             $table->timestamps();
             $table->softDeletes();

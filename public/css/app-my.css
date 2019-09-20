@@ -15,6 +15,10 @@ ul {
   font-weight: bolder;
 }
 
+#second-navbar #snb-center .pointer {
+  cursor: pointer;
+}
+
 #second-navbar #snb-center .dropdown-menu {
   background-color: #f8fafc;
   top: 140%;

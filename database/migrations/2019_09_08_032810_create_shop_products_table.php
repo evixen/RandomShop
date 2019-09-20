@@ -14,8 +14,9 @@ class CreateShopProductsTable extends Migration
     public function up()
     {
         Schema::create('shop_products', function (Blueprint $table) {
+
             $table->bigIncrements('id');
-            $table->integer('category_id')->unsigned();
+            $table->unsignedBigInteger('category_id')->unsigned();
             $table->string('name')->unique();
             $table->string('slug')->unique();
             $table->text('details')->nullable();
@@ -25,6 +26,7 @@ class CreateShopProductsTable extends Migration
             $table->timestamps();
             $table->softDeletes();
 
+            $table->foreign('category_id')->references('id')->on('shop_product_categories');
         });
     }
 
