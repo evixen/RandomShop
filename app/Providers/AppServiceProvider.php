@@ -24,35 +24,23 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // Вывод меню категорий во все шаблоны
-        \View::composer('*', function ($view) {
+        // Вывод в панель навигации (layouts.nav2) массива категорий меню
+
+        \View::composer('layouts.nav2', function ($view) {
 
             $menu = [];
 
             $columns = ['id', 'title', 'parent_id', 'menu_level'];
 
-            $categories = ShopProductCategory::select($columns)->get();
+            $categories = ShopProductCategory::with('parent:id,title,parent_id')
+                ->select($columns)->get();
 
+            foreach ($categories as $cat) {
+                if ($cat->menu_level == 3) {
 
-            for ($i = 0; $i < $categories->count(); $i++) {
+                    $catLevelOneTitle = $categories[$cat->parent->parent_id - 1]['title'];
 
-                if ($categories[$i]['menu_level'] == 3) {
-
-                    $secondLevelId = $categories[$i]['parent_id'];
-
-                    $secondLevelTitle = $categories[$secondLevelId - 1]['title'];
-
-                    $secondLevel = $categories->where('title', $secondLevelTitle)->first();
-
-
-                    $firstLevelId = $secondLevel['parent_id'];
-
-                    $firstLevel = $categories->where('id', $firstLevelId)->first();
-
-                    $firstLevelTitle = $firstLevel['title'];
-
-
-                    $menu[$firstLevelTitle][$secondLevelTitle][] = $categories[$i]['title'];
+                    $menu[$catLevelOneTitle][$cat->parent->title][] = $cat->title;
                 }
             }
 

@@ -14,8 +14,6 @@ class CartController extends BaseController
      */
     public function index()
     {
-//        dd(\ShoppingCart::all());
-
         return view('Shop.cart');
     }
 
@@ -36,7 +34,9 @@ class CartController extends BaseController
      */
     public function store(Request $request)
     {
-        \ShoppingCart::add($request->id, $request->name, 1, $request->price, ['slug' => $request->slug]);
+        \ShoppingCart::add($request->id, $request->name, 1, $request->price,
+            ['slug' => $request->slug, 'category' => $request->category]);
+
         \ShoppingCart::associate('App\Models\ShopProduct');
 
         return back()->with('success_message', 'Добавлено в корзину');

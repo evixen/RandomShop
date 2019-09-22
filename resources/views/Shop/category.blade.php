@@ -2,6 +2,20 @@
 
 @section('content')
     <div class="container">
+
+        <div class="row sort">
+            <div class="col-sm-2">
+                <strong>Сортировка цены по:</strong>
+            </div>
+            <div class="col-sm-1">
+                <a href="{{ route('shop.category', [$category, 'sort' => 'low_high']) }}">возрастанию</a>
+            </div>
+            <div class="col-sm-1">
+                <a href="{{ route('shop.category', [$category, 'sort' => 'high_low']) }}">убыванию</a>
+            </div>
+        </div>
+        <br><br>
+
         <div class="row justify-content-around flex-wrap">
             @foreach ($products as $product)
                 <div class="col-sm-3 product">
@@ -17,9 +31,6 @@
                     <br>
                 </div>
             @endforeach
-        </div>
-        <div class="row justify-content-center">
-            {{ $products->links() }}
         </div>
     </div>
 @endsection

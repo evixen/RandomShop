@@ -16,14 +16,17 @@
 //});
 
 Route::group(['namespace' => 'Shop'], function () {
-    Route::get('/', 'MainController@index')->name('shop.main');
-    Route::get('/product/{slug}', 'MainController@show')->name('shop.product');
 
     // Маршруты корзины товаров
     Route::get('/cart', 'CartController@index')->name('cart.index');
     Route::post('/cart', 'CartController@store')->name('cart.store');
     Route::delete('/cart/{id}', 'CartController@delete')->name('cart.delete');
     Route::put('/cart', 'CartController@clean')->name('cart.clean');
+
+    Route::get('/', 'MainController@index')->name('shop.main');
+    Route::get('/{category}', 'MainController@category')->name('shop.category');
+    Route::get('/{category}/{slug}', 'MainController@product')->name('shop.product');
+
 
 });
 

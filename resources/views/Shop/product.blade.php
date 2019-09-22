@@ -34,8 +34,6 @@
                 <div class="product-price">{{ $product->price }} р.</div>
                 <br>
                 <div class="product-details">{{ $product->details }}</div>
-                <br>
-                <div class="product-details">{{ $product->category->title }}</div>
                 <br><br>
                 <form action="{{ route('cart.store') }}" method="post">
                     {{ csrf_field() }}
@@ -43,6 +41,7 @@
                     <input type="hidden" name="name" value="{{ $product->name }}">
                     <input type="hidden" name="slug" value="{{ $product->slug }}">
                     <input type="hidden" name="price" value="{{ $product->price }}">
+                    <input type="hidden" name="category" value="{{ $product->category->slug }}">
                     <button type="submit" class="btn btn-primary">Добавить в корзину</button>
                 </form>
             </div>

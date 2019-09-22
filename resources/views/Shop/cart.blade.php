@@ -19,11 +19,11 @@
                 <div class="row">
                     @foreach(ShoppingCart::all() as $product)
                         <div class="col-md-6">
-                            <a href="{{ route('shop.product', $product->slug) }}">
+                            <a href="{{ route('shop.product', [$product->category, $product->slug]) }}">
                                 <img src="{{ asset('/img/products/' . $product->slug . '.jpg') }}" alt="phone"
                                      style="width: 150px">
                             </a>
-                            <a href="{{ route('shop.product', $product->slug) }}">
+                            <a href="{{ route('shop.product', [$product->category, $product->slug]) }}">
                                 <div class="product-name">{{ $product->name }}</div>
                             </a>
                             <br>

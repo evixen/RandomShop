@@ -10,13 +10,15 @@
                 <ul class="navbar-nav d-flex justify-content-around align-items-center flex-wrap">
                     @foreach($menu as $key1 => $value1)
                         <li class="nav-item dropdown"><span class="nav-link dropdown-toggle text-dark pointer"
-                                                         id="DropdownMenuLink-1" data-toggle="dropdown"
-                                                         aria-haspopup="true" aria-expanded="false">{{ $key1 }}</span>
+                                                            id="DropdownMenuLink-1" data-toggle="dropdown"
+                                                            aria-haspopup="true"
+                                                            aria-expanded="false">{{ $key1 }}</span>
                             <div class="dropdown-menu shadow-sm" aria-labelledby="DropdownMenuLink-1">
                                 @foreach($value1 as $key2 => $value2)
                                     <span class="dropdown-item">{{ $key2 }}</span>
                                     @foreach($value2 as $key3)
-                                        <a class="dropdown-item" href="{{ Str::slug($key3) }}">{{ $key3 }}</a>
+                                        <a class="dropdown-item"
+                                           href="{{ route('shop.category', Str::slug($key3)) }}">{{ $key3 }}</a>
                                     @endforeach
                                 @endforeach
                             </div>

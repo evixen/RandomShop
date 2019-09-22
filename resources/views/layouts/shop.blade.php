@@ -29,8 +29,6 @@
     {{-- Second Navbar --}}
     @include('layouts.nav2')
 
-
-
     {{-- Content --}}
     <main class="py-4">
         @yield('content')

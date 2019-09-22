@@ -17,8 +17,8 @@ class ShopProductCategory extends Model
 //            'description',
 //        ];
 
-    static public function getCategoriesForMenu()
+    public function parent()
     {
-
+        return $this->belongsTo(ShopProductCategory::class, 'parent_id', 'id');
     }
 }
