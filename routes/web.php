@@ -11,25 +11,42 @@
 |
 */
 
-//Route::get('/', function () {
-//    return view('welcome');
-//});
-
+// Маршруты видимой части магазина
 Route::group(['namespace' => 'Shop'], function () {
 
-    // Маршруты корзины товаров
+    Route::get('/', 'MainController@index')->name('shop.main');
+
+    Route::get('/{category}', 'MainController@category')
+        ->where('category', '^((?!admin|cart$|/).)*$')
+        ->name('shop.category');
+
+    Route::get('/{category}/{slug}', 'MainController@product')
+        ->where('category', '^((?!admin|cart/).)*$')
+        ->name('shop.product');
+
+    // Корзина товаров
     Route::get('/cart', 'CartController@index')->name('cart.index');
     Route::post('/cart', 'CartController@store')->name('cart.store');
     Route::delete('/cart/{id}', 'CartController@delete')->name('cart.delete');
     Route::put('/cart', 'CartController@clean')->name('cart.clean');
 
-    Route::get('/', 'MainController@index')->name('shop.main');
-    Route::get('/{category}', 'MainController@category')->name('shop.category');
-    Route::get('/{category}/{slug}', 'MainController@product')->name('shop.product');
+});
 
+// Маршруты админки
+Route::group(['namespace' => 'Shop\Admin', 'prefix' => 'admin'], function () {
+
+    Route::get('/', 'MainController@index')->name('shop.admin.main');
+
+    // Категории
+    Route::resource('categories', 'CategoryController')
+        ->except('show')
+        ->names('shop.admin.categories');
+
+    /*// Товары
+    Route::resource('products', 'ProductsController')
+        ->except(['show'])
+        ->names('shop.admin.products');*/
 
 });
 
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');

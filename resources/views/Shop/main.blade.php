@@ -2,9 +2,9 @@
 
 @section('content')
     <div class="container">
-        <div class="row justify-content-around flex-wrap">
+        <div class="row justify-content-center">
             @foreach ($products as $product)
-                <div class="col-sm-3 product">
+                <div class="col-sm-4 product">
                     <a href="{{ route('shop.product', [$product->category->slug, $product->slug]) }}">
                         <img src="{{ asset('/img/products/' . $product->slug . '.jpg') }}" alt="phone"
                              style="width: 150px">

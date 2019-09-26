@@ -9,6 +9,9 @@ class ShopProduct extends Model
 {
     use SoftDeletes;
 
+    public $timestamps = false;
+
+
     public function category()
     {
         return $this->belongsTo(ShopProductCategory::class);

@@ -49489,6 +49489,17 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/sass/admin-shop.scss":
+/*!****************************************!*\
+  !*** ./resources/sass/admin-shop.scss ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
 /***/ "./resources/sass/app-my.scss":
 /*!************************************!*\
   !*** ./resources/sass/app-my.scss ***!
@@ -49501,14 +49512,15 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ 0:
-/*!****************************************************************!*\
-  !*** multi ./resources/js/app.js ./resources/sass/app-my.scss ***!
-  \****************************************************************/
+/*!*************************************************************************************************!*\
+  !*** multi ./resources/js/app.js ./resources/sass/app-my.scss ./resources/sass/admin-shop.scss ***!
+  \*************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! /var/www/evixen.site/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /var/www/evixen.site/resources/sass/app-my.scss */"./resources/sass/app-my.scss");
+__webpack_require__(/*! /var/www/evixen.site/resources/sass/app-my.scss */"./resources/sass/app-my.scss");
+module.exports = __webpack_require__(/*! /var/www/evixen.site/resources/sass/admin-shop.scss */"./resources/sass/admin-shop.scss");
 
 
 /***/ })

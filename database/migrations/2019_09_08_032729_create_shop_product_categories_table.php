@@ -19,10 +19,10 @@ class CreateShopProductCategoriesTable extends Migration
             $table->string('title')->unique();
             $table->string('slug')->unique();
             $table->text('description')->nullable();
-            $table->integer('menu_level');
+            $table->integer('menu_level')->unsigned();
 
-            $table->timestamps();
             $table->softDeletes();
+
         });
     }
 

@@ -12,7 +12,7 @@
                         <li class="nav-item dropdown"><span class="nav-link dropdown-toggle text-dark pointer"
                                                             id="DropdownMenuLink-1" data-toggle="dropdown"
                                                             aria-haspopup="true"
-                                                            aria-expanded="false">{{ $key1 }}</span>
+                                                            aria-expanded="false">{{ mb_strtoupper($key1) }}</span>
                             <div class="dropdown-menu shadow-sm" aria-labelledby="DropdownMenuLink-1">
                                 @foreach($value1 as $key2 => $value2)
                                     <span class="dropdown-item">{{ $key2 }}</span>

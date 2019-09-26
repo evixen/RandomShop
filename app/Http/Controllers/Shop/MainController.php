@@ -4,13 +4,16 @@ namespace App\Http\Controllers\Shop;
 
 use App\Models\ShopProduct;
 
-class MainController extends BaseController
+class MainController extends GuestBaseController
 {
     public function index()
     {
-        $products = ShopProduct::inRandomOrder()
+        $columns = ['category_id', 'name', 'slug', 'price'];
+
+        $products = ShopProduct::select($columns)
+            ->inRandomOrder()
             ->with('category:id,title,slug')
-            ->paginate(8);
+            ->paginate(9);
 
         return view('Shop.main', compact('products'));
     }
@@ -20,7 +23,9 @@ class MainController extends BaseController
         $products = ShopProduct::with('category:id,slug')
             ->whereHas('category', function ($query) use ($category) {
                 $query->where('slug', $category);
-            })->inRandomOrder()->get();
+            })
+            ->inRandomOrder()
+            ->get();
 
         // Сортировка по цене
         if (request()->sort == 'low_high') {
@@ -38,7 +43,9 @@ class MainController extends BaseController
 
     public function product($category, $slug)
     {
-        $product = ShopProduct::where('slug', $slug)->with('category:id,slug')->firstOrFail();
+        $product = ShopProduct::where('slug', $slug)
+            ->with('category:id,slug')
+            ->firstOrFail();
 
         return view('Shop.product', compact('product'));
     }

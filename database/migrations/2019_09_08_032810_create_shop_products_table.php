@@ -23,7 +23,6 @@ class CreateShopProductsTable extends Migration
             $table->float('price');
             $table->text('description')->nullable();
 
-            $table->timestamps();
             $table->softDeletes();
 
             $table->foreign('category_id')->references('id')->on('shop_product_categories');

@@ -26,7 +26,7 @@ class AppServiceProvider extends ServiceProvider
     {
         // Вывод в панель навигации (layouts.nav2) массива категорий меню
 
-        \View::composer('layouts.nav2', function ($view) {
+        \View::composer(['layouts.shop-nav2', 'Shop.Admin.categories.index'], function ($view) {
 
             $menu = [];
 
@@ -42,7 +42,22 @@ class AppServiceProvider extends ServiceProvider
 
                     $menu[$catLevelOneTitle][$cat->parent->title][] = $cat->title;
                 }
+
+                // Проверяем наличие "пустых" категорий первого и второго уровня
+                if ($cat->menu_level == 1 AND array_key_exists($cat->title, $menu) == false) {
+                    $menu[$cat->title] = [];
+                }
+
+                if ($cat->menu_level == 2) {
+                    foreach ($menu as $menuLevelTwo) {
+                        if (array_key_exists($cat->title, $menuLevelTwo))
+                            continue;
+
+                        $menu[$cat->parent->title][$cat->title] = [];
+                    }
+                }
             }
+
 
             $view->with('menu', $menu);
         });

@@ -24,10 +24,10 @@
 <div id="app">
 
     {{-- First Navbar --}}
-    @include('layouts.nav1')
+    @include('layouts.shop-nav1')
 
     {{-- Second Navbar --}}
-    @include('layouts.nav2')
+    @include('layouts.shop-nav2')
 
     {{-- Content --}}
     <main class="py-4">
