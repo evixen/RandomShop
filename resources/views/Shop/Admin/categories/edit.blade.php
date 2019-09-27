@@ -21,6 +21,5 @@
                 @include('Shop.Admin.categories.includes.category_edit_add_col')
             </div>
         </div>
-        </form>
     </div>
 @endsection

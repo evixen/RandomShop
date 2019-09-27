@@ -5,41 +5,59 @@ namespace App\Http\Controllers\Shop\Admin;
 use App\Http\Requests\ShopProductCategoryCreateRequest;
 use App\Http\Requests\ShopProductCategoryUpdateRequest;
 use App\Models\ShopProductCategory;
-use Illuminate\Http\Request;
+use App\Repositories\ShopProductCategoryRepository;
+use Illuminate\Http\Response;
 
 class CategoryController extends AdminBaseController
 {
+
+    /*
+     * @var ShopProductCategoryRepository
+     */
+    protected $categories;
+
+
+    public function __construct(ShopProductCategoryRepository $categories)
+    {
+        parent::__construct();
+
+        $this->categories = $categories;
+    }
+
+
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
-        $paginator = ShopProductCategory::with('parent:id,title')->paginate(10);
+        $paginator = $this->categories->getAllWithPaginate(10);
 
         return view('Shop.Admin.categories.index', compact('paginator'));
     }
 
+
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
         $category = new ShopProductCategory();
 
-        $categoryList = ShopProductCategory::select(['id', 'title'])->get();
+        $categoryList = $this->categories->getForComboBox();
 
         return view('Shop.Admin.categories.create', compact('category', 'categoryList'));
     }
 
+
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @param ShopProductCategoryCreateRequest $request
+     * @return Response
      */
     public function store(ShopProductCategoryCreateRequest $request)
     {
@@ -50,16 +68,15 @@ class CategoryController extends AdminBaseController
         }
 
         // Добавляем menu_level категории
-        $parentCategory = ShopProductCategory::select('menu_level')
-            ->where('id', $request->parent_id)
-            ->first();
+        $parentMenuLevel = $this->categories->getMenuLevel($request->parent_id);
 
-        if ($parentCategory) {
-            $data['menu_level'] = $parentCategory->menu_level + 1;
+        if (!empty($parentMenuLevel)) {
+            $data['menu_level'] = $parentMenuLevel + 1;
         } else {
             $data['menu_level'] = 1;
         }
 
+        // Сохраняем объект с введенными данными
         $category = new ShopProductCategory($data);
 
         $result = $category->save();
@@ -75,31 +92,33 @@ class CategoryController extends AdminBaseController
         }
     }
 
+
     /**
      * Show the form for editing the specified resource.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function edit($id)
     {
-        $category = ShopProductCategory::where('id', $id)->first();
+        $category = $this->categories->getEdit($id);
 
-        $categoryList = ShopProductCategory::select(['id', 'title'])->get();
+        $categoryList = $this->categories->getForComboBox();
 
         return view('Shop.Admin.categories.edit', compact('category', 'categoryList'));
     }
 
+
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param ShopProductCategoryUpdateRequest $request
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function update(ShopProductCategoryUpdateRequest $request, $id)
     {
-        $category = ShopProductCategory::where('id', $id)->first();
+        $category = $this->categories->getEdit($id);
 
         if (empty($category)) {
             return back()
@@ -107,21 +126,18 @@ class CategoryController extends AdminBaseController
                 ->withInput();
         }
 
+        $data = $request->input();
+
         // Изменяем menu_level категории
-        $data = $request->all();
+        $parentMenuLevel = $this->categories->getMenuLevel($request->parent_id);
 
-        $parentCategory = ShopProductCategory::select('menu_level')
-            ->where('id', $request->parent_id)
-            ->first();
-
-
-        if ($parentCategory) {
-            $data['menu_level'] = $parentCategory->menu_level + 1;
+        if (!empty($parentMenuLevel)) {
+            $data['menu_level'] = $parentMenuLevel + 1;
         } else {
             $data['menu_level'] = 1;
         }
 
-
+        // Сохраняем обновленные данные
         $result = $category
             ->fill($data)
             ->save();
@@ -137,14 +153,31 @@ class CategoryController extends AdminBaseController
         }
     }
 
+
     /**
      * Remove the specified resource from storage.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function destroy($id)
     {
+        // Запрещаем удаление, если есть вложенные категории
+        $children = $this->categories->getChildren($id);
 
+        if (!$children->isEmpty()) {
+            return back()->withErrors(['msg' => 'Перед удалением необходимо удалить вложенные категории']);
+        }
+
+        // Удаляем запись
+        $result = $this->categories->deleteRecord($id);
+
+        if ($result) {
+            return redirect()
+                ->route('shop.admin.categories.index')
+                ->with(['success' => "Запись id[$id] удалена"]);
+        } else {
+            return back()->withErrors(['msg' => 'Ошибка удаления']);
+        }
     }
 }

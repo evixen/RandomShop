@@ -2,6 +2,9 @@
 
 @section('content')
     <div class="container">
+
+        @include('Shop.Admin.result_messages')
+
         <div class="row justify-content-center">
             <div class="col-sm-12">
                 <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
