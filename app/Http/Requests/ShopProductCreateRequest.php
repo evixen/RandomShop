@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ShopProductCategoryUpdateRequest extends FormRequest
+class ShopProductCreateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,11 +24,10 @@ class ShopProductCategoryUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'id' => 'integer|exists:shop_product_categories,id',
-            'title' => 'required|min:4|max:200',
+            'name' => 'required|min:4|max:200',
             'slug' => 'max:200',
-            'description' => 'max:500',
-            'parent_id' => 'required|integer'
+            'details' => 'max:2000',
+            'category_id' => 'required|integer'
         ];
     }
 }

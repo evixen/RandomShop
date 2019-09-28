@@ -9,6 +9,15 @@ class ShopProduct extends Model
 {
     use SoftDeletes;
 
+    protected $fillable =
+        [
+            'name',
+            'slug',
+            'category_id',
+            'details',
+            'price'
+        ];
+
     public $timestamps = false;
 
 

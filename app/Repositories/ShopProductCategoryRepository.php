@@ -50,7 +50,7 @@ class ShopProductCategoryRepository extends BaseRepository
      * @param int|null $perPage
      * @return LengthAwarePaginator
      */
-    public function getAllWithPaginate($perPage = null)
+    public function getAllWithPaginate($perPage = 10)
     {
         $columns = ['id', 'title', 'parent_id'];
 

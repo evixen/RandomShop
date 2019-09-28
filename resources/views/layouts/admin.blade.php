@@ -49,7 +49,8 @@
                         <li class="nav-item"><a href="{{ route('shop.admin.categories.index') }}"
                                                 class="nav-link">Категории</a>
                         </li>
-                        <li class="nav-item"><a href="#" class="nav-link">Товары</a></li>
+                        <li class="nav-item"><a href="{{ route('shop.admin.products.index') }}"
+                                                class="nav-link">Товары</a></li>
                         <li class="nav-item"><a href="#" class="nav-link">Пользователи</a></li>
                         <li class="nav-item"><a href="#" class="nav-link">Роли</a></li>
                     </ul>

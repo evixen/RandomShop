@@ -103,6 +103,13 @@ class CategoryController extends AdminBaseController
     {
         $category = $this->categories->getEdit($id);
 
+        if (empty($category)) {
+            return redirect()
+                ->route('shop.admin.categories.index')
+                ->withErrors(['msg' => "Запись id=[{$id}] не найдена"])
+                ->withInput();
+        }
+
         $categoryList = $this->categories->getForComboBox();
 
         return view('Shop.Admin.categories.edit', compact('category', 'categoryList'));

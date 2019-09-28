@@ -42,10 +42,10 @@ Route::group(['namespace' => 'Shop\Admin', 'prefix' => 'admin'], function () {
         ->except('show')
         ->names('shop.admin.categories');
 
-    /*// Товары
-    Route::resource('products', 'ProductsController')
+    // Товары
+    Route::resource('products', 'ProductController')
         ->except(['show'])
-        ->names('shop.admin.products');*/
+        ->names('shop.admin.products');
 
 });
 
