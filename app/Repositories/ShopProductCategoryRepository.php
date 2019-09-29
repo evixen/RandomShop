@@ -82,6 +82,50 @@ class ShopProductCategoryRepository extends BaseRepository
 
 
     /**
+     * Получить массив категорий для формирования вложенного меню
+     *
+     * @return array
+     */
+    public function getMenu()
+    {
+        $menu = [];
+
+        $columns = ['id', 'title', 'parent_id', 'menu_level'];
+
+        $categories = $this
+            ->startConditions()
+            ->with('parent:id,title,parent_id')
+            ->select($columns)
+            ->get();
+
+        foreach ($categories as $cat) {
+            if ($cat->menu_level == 3) {
+
+                $catLevelOneTitle = $categories[$cat->parent->parent_id - 1]['title'];
+
+                $menu[$catLevelOneTitle][$cat->parent->title][] = $cat->title;
+            }
+
+            // Проверяем наличие "пустых" категорий первого и второго уровня
+            if ($cat->menu_level == 1 AND array_key_exists($cat->title, $menu) == false) {
+                $menu[$cat->title] = [];
+            }
+
+            if ($cat->menu_level == 2) {
+                foreach ($menu as $menuLevelTwo) {
+                    if (array_key_exists($cat->title, $menuLevelTwo))
+                        continue;
+
+                    $menu[$cat->parent->title][$cat->title] = [];
+                }
+            }
+        }
+
+        return $menu;
+    }
+
+
+    /**
      * Удалить запись с указанным идентификатором
      *
      * @param $id
