@@ -24,8 +24,8 @@ class ShopProductCategoryCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|min:4|max:200',
-            'slug' => 'max:200',
+            'title' => 'required|min:4|max:200|unique:shop_product_categories,title',
+            'slug' => 'max:200|unique:shop_product_categories,slug',
             'description' => 'max:500',
             'parent_id' => 'required|integer'
         ];

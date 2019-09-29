@@ -63,19 +63,6 @@ class CategoryController extends AdminBaseController
     {
         $data = $request->input();
 
-        if (empty($data['slug'])) {
-            $data['slug'] = \Str::slug($data['title']);
-        }
-
-        // Добавляем menu_level категории
-        $parentMenuLevel = $this->categories->getMenuLevel($request->parent_id);
-
-        if (!empty($parentMenuLevel)) {
-            $data['menu_level'] = $parentMenuLevel + 1;
-        } else {
-            $data['menu_level'] = 1;
-        }
-
         // Сохраняем объект с введенными данными
         $category = new ShopProductCategory($data);
 
@@ -134,15 +121,6 @@ class CategoryController extends AdminBaseController
         }
 
         $data = $request->input();
-
-        // Изменяем menu_level категории
-        $parentMenuLevel = $this->categories->getMenuLevel($request->parent_id);
-
-        if (!empty($parentMenuLevel)) {
-            $data['menu_level'] = $parentMenuLevel + 1;
-        } else {
-            $data['menu_level'] = 1;
-        }
 
         // Сохраняем обновленные данные
         $result = $category

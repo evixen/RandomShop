@@ -24,8 +24,8 @@ class ShopProductCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|min:4|max:200',
-            'slug' => 'max:200',
+            'name' => 'required|min:4|max:200|unique:shop_products,name',
+            'slug' => 'max:200|unique:shop_products,slug',
             'details' => 'max:2000',
             'category_id' => 'required|integer'
         ];

@@ -3,6 +3,9 @@
 namespace App\Providers;
 
 use App\Models\ShopProductCategory;
+use App\Models\ShopProduct;
+use App\Observers\ShopProductCategoryObserver;
+use App\Observers\ShopProductObserver;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -24,8 +27,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // Вывод в панель навигации (layouts.nav2) массива категорий меню
 
+        ShopProductCategory::observe(ShopProductCategoryObserver::class);
+        ShopProduct::observe(ShopProductObserver::class);
+
+        // Вывод в панель навигации массива категорий меню
         \View::composer(['layouts.shop-nav2', 'Shop.Admin.categories.index'], function ($view) {
 
             $menu = [];

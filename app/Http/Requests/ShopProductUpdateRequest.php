@@ -25,8 +25,8 @@ class ShopProductUpdateRequest extends FormRequest
     {
         return [
             'id' => 'integer|exists:shop_products,id',
-            'name' => 'required|min:4|max:200',
-            'slug' => 'max:200',
+            'name' => 'required|min:4|max:200|unique:shop_products,name,' . $this->id,
+            'slug' => 'max:200|unique:shop_products,slug, ' . $this->id,
             'details' => 'max:2000',
             'category_id' => 'required|integer'
         ];

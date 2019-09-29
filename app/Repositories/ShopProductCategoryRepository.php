@@ -65,28 +65,6 @@ class ShopProductCategoryRepository extends BaseRepository
 
 
     /**
-     * Получить уровень вложенности меню
-     *
-     * @param $id
-     * @return int
-     */
-    public function getMenuLevel($id)
-    {
-        $result = $this
-            ->startConditions()
-            ->select('menu_level')
-            ->where('id', $id)
-            ->first();
-
-        if (is_null($result)) {
-            return 0;
-        } else {
-            return $result->menu_level;
-        }
-    }
-
-
-    /**
      * Получить вложенные категории
      *
      * @param $id

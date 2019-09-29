@@ -70,10 +70,6 @@ class ProductController extends AdminBaseController
     {
         $data = $request->input();
 
-        if (empty($data['slug'])) {
-            $data['slug'] = \Str::slug($data['name']);
-        }
-
         // Сохраняем объект с введенными данными
         $product = new ShopProduct($data);
 
