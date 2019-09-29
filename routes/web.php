@@ -41,11 +41,19 @@ Route::group(['namespace' => 'Shop\Admin', 'prefix' => 'admin'], function () {
     Route::resource('categories', 'CategoryController')
         ->except('show')
         ->names('shop.admin.categories');
+    Route::get('/categories/deleted', 'CategoryController@deleted')
+        ->name('shop.admin.categories.deleted');
+    Route::get('/categories/{id}/restore', 'CategoryController@restore')
+        ->name('shop.admin.categories.restore');
 
     // Товары
     Route::resource('products', 'ProductController')
         ->except(['show'])
         ->names('shop.admin.products');
+    Route::get('/products/deleted', 'ProductController@deleted')
+        ->name('shop.admin.products.deleted');
+    Route::get('/products/{id}/restore', 'ProductController@restore')
+        ->name('shop.admin.products.restore');
 
 });
 

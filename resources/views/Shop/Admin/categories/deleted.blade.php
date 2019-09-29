@@ -7,11 +7,7 @@
 
         <div class="row justify-content-center">
             <div class="col-sm-12">
-                <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
-                    <a href="{{ route('shop.admin.categories.create') }}" class="btn btn-primary">Добавить</a>
-                    <a href="{{ route('shop.admin.categories.deleted') }}" class="btn btn-secondary ml-auto">
-                        Показать архивные</a>
-                </nav>
+                <h3 class="h3">Категории в архиве</h3>
                 <div class="card">
                     <div class="card-body">
                         <table class="table table-hover">
@@ -20,10 +16,11 @@
                                 <th>#</th>
                                 <th>Категория</th>
                                 <th>Родитель</th>
+                                <th></th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($paginator as $category)
+                            @foreach($deleted as $category)
                                 <tr>
                                     <td>{{ $category->id }}</td>
                                     <td>
@@ -38,6 +35,16 @@
                                             <em style="color: #ccc">Нет</em>
                                         @endif
                                     </td>
+                                    <td>
+                                        <form method="get"
+                                              action="{{ route('shop.admin.categories.restore', $category->id) }}">
+                                            <input value="{{ $category->id }}"
+                                                   type="hidden"
+                                                   name="id"
+                                                   id="id">
+                                            <button type="submit" class="btn btn-sm btn-warning">восстановить</button>
+                                        </form>
+                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>
@@ -46,30 +53,14 @@
                 </div>
             </div>
             <div class="col-sm-12">
-                @if($paginator->total(1) > $paginator->count())
+                @if($deleted->total(1) > $deleted->count())
                     <br>
                     <div class="row justify-content-center">
                         <div class="col-md-12">
-                            {{ $paginator->links() }}
+                            {{ $deleted->links() }}
                         </div>
                     </div>
                 @endif
-            </div>
-            <div class="col-sm-12">
-                {{-- $menu приходит из AppServiceProvider --}}
-                <ul class="d-flex flex-row justify-content-between flex-wrap" id="categories-view">
-                    @foreach($menu as $key1 => $value1)
-                        <li class="categories-family">
-                            <div class="category level-1">{{ $key1 }}</div>
-                            @foreach($value1 as $key2 => $value2)
-                                <div class="category level-2">{{ $key2 }}</div>
-                                @foreach($value2 as $key3)
-                                    <div class="category level-3">{{ $key3 }}</div>
-                                @endforeach
-                            @endforeach
-                        </li>
-                    @endforeach
-                </ul>
             </div>
         </div>
     </div>

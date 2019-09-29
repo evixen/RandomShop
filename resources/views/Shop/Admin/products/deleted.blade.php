@@ -7,11 +7,7 @@
 
         <div class="row justify-content-center">
             <div class="col-sm-12">
-                <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
-                    <a href="{{ route('shop.admin.products.create') }}" class="btn btn-primary">Добавить</a>
-                    <a href="{{ route('shop.admin.products.deleted') }}" class="btn btn-secondary ml-auto">
-                        Показать архивные</a>
-                </nav>
+                <h3 class="h3">Товары в архиве</h3>
                 <div class="card">
                     <div class="card-body">
                         <table class="table table-hover">
@@ -20,10 +16,11 @@
                                 <th>#</th>
                                 <th>Товар</th>
                                 <th>Категория</th>
+                                <th></th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($paginator as $product)
+                            @foreach($deleted as $product)
                                 <tr>
                                     <td>{{ $product->id }}</td>
                                     <td>
@@ -32,7 +29,21 @@
                                         </a>
                                     </td>
                                     <td>
-                                        {{ $product->category->title }}
+                                        @if(!empty($product->category->title))
+                                            {{ $product->category->title }}
+                                        @else
+                                            <em>Категория удалена</em>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <form method="get"
+                                              action="{{ route('shop.admin.products.restore', $product->id) }}">
+                                            <input value="{{ $product->id }}"
+                                                   type="hidden"
+                                                   name="id"
+                                                   id="id">
+                                            <button type="submit" class="btn btn-sm btn-warning">восстановить</button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach
@@ -42,11 +53,11 @@
                 </div>
             </div>
             <div class="col-sm-12">
-                @if($paginator->total(1) > $paginator->count())
+                @if($deleted->total(1) > $deleted->count())
                     <br>
                     <div class="row justify-content-center">
                         <div class="col-md-12">
-                            {{ $paginator->links() }}
+                            {{ $deleted->links() }}
                         </div>
                     </div>
                 @endif

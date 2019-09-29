@@ -21,7 +21,7 @@ class ShopProductCategoryRepository extends BaseRepository
      */
     public function getEdit($id)
     {
-        return $this->startConditions()->find($id);
+        return $this->startConditions()->withTrashed()->find($id);
     }
 
 
@@ -125,17 +125,20 @@ class ShopProductCategoryRepository extends BaseRepository
     }
 
 
-    /**
-     * Удалить запись с указанным идентификатором
-     *
-     * @param $id
-     * @return mixed
-     */
-    public function deleteRecord($id)
+    public function getTrashed()
     {
-        return $this->getModelClass()::destroy($id);
-    }
+        $columns = ['id', 'title', 'parent_id'];
 
+        $result = $this
+            ->startConditions()
+            ->select($columns)
+            ->where('deleted_at', '!=', null)
+            ->withTrashed()
+            ->with(['parent:id,title'])
+            ->paginate(10);
+
+        return $result;
+    }
 
     /**
      * @return mixed|string

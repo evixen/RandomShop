@@ -155,7 +155,7 @@ class CategoryController extends AdminBaseController
         }
 
         // Удаляем запись
-        $result = $this->categories->deleteRecord($id);
+        $result = ShopProductCategory::destroy($id);
 
         if ($result) {
             return redirect()
@@ -163,6 +163,42 @@ class CategoryController extends AdminBaseController
                 ->with(['success' => "Запись id[$id] удалена"]);
         } else {
             return back()->withErrors(['msg' => 'Ошибка удаления']);
+        }
+    }
+
+    /**
+     * Показывает удаленные записи
+     *
+     * @return Response
+     */
+    public function deleted()
+    {
+        $deleted = $this->categories->getTrashed();
+
+        return view('Shop.Admin.categories.deleted', compact('deleted'));
+    }
+
+
+    /**
+     * Восстанавливает удаленную запись
+     *
+     * @param int $id
+     * @return Response
+     */
+    public function restore($id)
+    {
+        $category = $this->categories->getEdit($id);
+
+        $category->deleted_at = null;
+
+        if ($category->save()) {
+            return redirect()
+                ->route('shop.admin.categories.edit', $category->id)
+                ->with(['success' => "Запись id[$id] восстановлена"]);
+        } else {
+            return back()
+                ->withErrors(['msg' => "Ошибка востановления"])
+                ->withInput();
         }
     }
 }

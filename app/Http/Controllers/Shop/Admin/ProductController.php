@@ -148,7 +148,7 @@ class ProductController extends AdminBaseController
      */
     public function destroy($id)
     {
-        $result = $this->products->deleteRecord($id);
+        $result = ShopProduct::destroy($id);
 
         if ($result) {
             return redirect()
@@ -156,6 +156,43 @@ class ProductController extends AdminBaseController
                 ->with(['success' => "Запись id[$id] удалена"]);
         } else {
             return back()->withErrors(['msg' => 'Ошибка удаления']);
+        }
+    }
+
+
+    /**
+     * Показывает удаленные записи
+     *
+     * @return Response
+     */
+    public function deleted()
+    {
+        $deleted = $this->products->getTrashed();
+
+        return view('Shop.Admin.products.deleted', compact('deleted'));
+    }
+
+
+    /**
+     * Восстанавливает удаленную запись
+     *
+     * @param int $id
+     * @return Response
+     */
+    public function restore($id)
+    {
+        $product = $this->products->getEdit($id);
+
+        $product->deleted_at = null;
+
+        if ($product->save()) {
+            return redirect()
+                ->route('shop.admin.products.edit', $product->id)
+                ->with(['success' => "Запись id[$id] восстановлена"]);
+        } else {
+            return back()
+                ->withErrors(['msg' => "Ошибка востановления"])
+                ->withInput();
         }
     }
 }
