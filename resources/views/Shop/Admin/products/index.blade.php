@@ -32,7 +32,11 @@
                                         </a>
                                     </td>
                                     <td>
-                                        {{ $product->category->title }}
+                                        @if(!empty($product->category->title))
+                                            {{ $product->category->title }}
+                                        @else
+                                            <em>Категория удалена</em>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach

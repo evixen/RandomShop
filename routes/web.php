@@ -11,6 +11,10 @@
 |
 */
 
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
 // Маршруты видимой части магазина
 Route::group(['namespace' => 'Shop'], function () {
 
@@ -26,14 +30,14 @@ Route::group(['namespace' => 'Shop'], function () {
 
     // Корзина товаров
     Route::get('/cart', 'CartController@index')->name('cart.index');
-    Route::post('/cart', 'CartController@store')->name('cart.store');
+    Route::post('/cart', 'CartController@add')->name('cart.add');
     Route::delete('/cart/{id}', 'CartController@delete')->name('cart.delete');
     Route::put('/cart', 'CartController@clean')->name('cart.clean');
 
 });
 
 // Маршруты админки
-Route::group(['namespace' => 'Shop\Admin', 'prefix' => 'admin'], function () {
+Route::group(['namespace' => 'Shop\Admin', 'prefix' => 'admin', 'middleware' => 'web'], function () {
 
     Route::get('/', 'MainController@index')->name('shop.admin.main');
 
@@ -56,5 +60,3 @@ Route::group(['namespace' => 'Shop\Admin', 'prefix' => 'admin'], function () {
         ->name('shop.admin.products.restore');
 
 });
-
-Auth::routes();

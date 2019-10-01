@@ -32,7 +32,7 @@
                                         </a>
                                     </td>
                                     <td>
-                                        @if($category->parent_id != 0)
+                                        @if(!empty($category->parent->title))
                                             {{ $category->parent->title }}
                                         @else
                                             <em style="color: #ccc">Нет</em>

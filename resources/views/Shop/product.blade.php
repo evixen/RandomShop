@@ -3,16 +3,6 @@
 @section('title', $product->name)
 
 @section('content')
-    @if (session()->has('success_message'))
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-md-2 alert alert-success">
-                    {{ session()->get('success_message') }}
-                </div>
-            </div>
-        </div>
-    @endif
-
     @if(count($errors) > 0)
         <div class="alert alert-danger">
             <ul>
@@ -34,8 +24,8 @@
                 <div class="product-price">{{ $product->price }} р.</div>
                 <br>
                 <div class="product-details">{{ $product->details }}</div>
-                <br><br>
-                <form action="{{ route('cart.store') }}" method="post">
+                <br>
+                <form action="{{ route('cart.add') }}" method="post">
                     {{ csrf_field() }}
                     <input type="hidden" name="id" value="{{ $product->id }}">
                     <input type="hidden" name="name" value="{{ $product->name }}">
@@ -44,7 +34,16 @@
                     <input type="hidden" name="category" value="{{ $product->category->slug }}">
                     <button type="submit" class="btn btn-primary">Добавить в корзину</button>
                 </form>
+                @if (session()->has('success_message'))
+                    <br>
+                    <div class="col-sm-5 alert alert-success">
+                        {{ session()->get('success_message') }}
+                    </div>
+                @endif
             </div>
         </div>
+
+    </div>
+    </div>
     </div>
 @endsection

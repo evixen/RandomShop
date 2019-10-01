@@ -29,8 +29,6 @@
                             <br>
                             <div class="product-price">{{ $product->price}} руб.</div>
                             <br>
-                            <div class="product-details">{{ $product->rawId() }}</div>
-                            <br>
                             <div class="">
                                 <form action="{{ route('cart.delete', $product->rawId()) }}" method="post">
                                     {{ csrf_field() }}

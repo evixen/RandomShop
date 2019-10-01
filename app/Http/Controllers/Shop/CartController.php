@@ -8,31 +8,23 @@ class CartController extends GuestBaseController
 {
 
     /**
-     * Display a listing of the resource.
+     * Показывает список товаров в корзине
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
         return view('Shop.cart');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
+     * Добавляет товар в корзину
+     *
      * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Overtrue\LaravelShoppingCart\Exception
+     * @return RedirectResponse
      */
-    public function store(Request $request)
+    public function add(Request $request)
     {
         \ShoppingCart::add($request->id, $request->name, 1, $request->price,
             ['slug' => $request->slug, 'category' => $request->category]);
@@ -42,40 +34,13 @@ class CartController extends GuestBaseController
         return back()->with('success_message', 'Добавлено в корзину');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
     /**
-     * Show the form for editing the specified resource.
+     * Удаляет товар из корзины
      *
-     * @param int $id
-     * @return \Illuminate\Http\Response
+     * @param $rawId
+     * @return RedirectResponse
      */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
     public function delete($rawId)
     {
         \ShoppingCart::remove($rawId);
@@ -83,11 +48,11 @@ class CartController extends GuestBaseController
         return back();
     }
 
+
     /**
-     * Remove the specified resource from storage.
+     * Очищает корзину
      *
-     * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function clean()
     {

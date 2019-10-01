@@ -21,7 +21,6 @@ class CreateShopProductsTable extends Migration
             $table->string('slug')->unique();
             $table->text('details')->nullable();
             $table->float('price');
-            $table->text('description')->nullable();
 
             $table->softDeletes();
 
