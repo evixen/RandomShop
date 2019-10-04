@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateShopProductCategoriesTable extends Migration
+class CreateRolesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,12 @@ class CreateShopProductCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('shop_product_categories', function (Blueprint $table) {
+        Schema::create('roles', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('parent_id');
-            $table->string('title')->unique();
-            $table->string('slug')->unique();
-            $table->text('description')->nullable();
-            $table->unsignedBigInteger('menu_level');
+            $table->string('name');
 
+            $table->timestamps();
             $table->softDeletes();
-
         });
     }
 
@@ -33,6 +29,6 @@ class CreateShopProductCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('shop_product_categories');
+        Schema::dropIfExists('roles');
     }
 }

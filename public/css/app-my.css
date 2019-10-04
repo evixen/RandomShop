@@ -38,13 +38,32 @@ ul {
   background-color: #f1f5f9;
 }
 
-#second-navbar #snb-right ul {
-  max-width: 100%;
+#second-navbar #snb-right .material-icons {
+  transform: scale(1.3);
 }
 
-#second-navbar #snb-right .icon-prop {
-  max-height: 30px;
-  margin: 0 5px;
-  color: gray;
+#second-navbar #snb-right .user-dropdown {
+  min-width: 250px;
+  width: 250px;
+  background-color: #f8fafc;
+}
+
+#second-navbar #snb-right .cart .count {
+  color: #9561e2;
+  font-weight: bold;
+}
+
+@media screen and (max-width: 992px) {
+  .user-dropdown {
+    position: absolute;
+    left: -235%;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .user-dropdown {
+    position: absolute;
+    left: 0;
+  }
 }
 

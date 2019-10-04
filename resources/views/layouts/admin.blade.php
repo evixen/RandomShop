@@ -22,7 +22,6 @@
 </head>
 <body>
 <div id="app">
-
     <nav class="navbar navbar-expand-md shadow-sm" id="navbar-top">
         <div class="container-fluid">
             <div class="row">
@@ -31,7 +30,25 @@
                 </div>
                 <div class="col-sm-6" id="navbar-right">
                     <ul class="navbar-nav d-flex justify-content-end flex-wrap align-items-center">
-                        <li class="nav-item">Hello, <a href="#">#Username#</a></li>
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                {{ Auth::user()->name }} <span class="caret"></span>
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                   onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
+                                </a>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                      style="display: none;">
+                                    @csrf
+                                </form>
+                            </div>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -51,7 +68,8 @@
                         </li>
                         <li class="nav-item"><a href="{{ route('shop.admin.products.index') }}"
                                                 class="nav-link">Товары</a></li>
-                        <li class="nav-item"><a href="#" class="nav-link">Пользователи</a></li>
+                        <li class="nav-item"><a href="{{ route('shop.admin.users') }}"
+                                                class="nav-link">Пользователи</a></li>
                         <li class="nav-item"><a href="#" class="nav-link">Роли</a></li>
                     </ul>
                 </nav>

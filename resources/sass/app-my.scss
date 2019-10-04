@@ -63,18 +63,37 @@ ul {
 
     #snb-right {
 
-        ul {
-            max-width: 100%;
+        .material-icons {
+            transform: scale(1.3);
         }
 
-        .icon-prop {
-            max-height: 30px;
-            margin: 0 5px;
-            color: gray;
+        .user-dropdown {
+            min-width: 250px;
+            width: 250px;
+            background-color: $body-bg;
+        }
+
+        .cart {
+            .count {
+                color: $purple;
+                font-weight: bold;
+            }
         }
     }
 
 }
 
 
+@media screen and (max-width: 992px) {
+    .user-dropdown {
+        position: absolute;
+        left: -235%;
+    }
+}
 
+@media screen and (max-width: 767px) {
+    .user-dropdown {
+        position: absolute;
+        left: 0;
+    }
+}

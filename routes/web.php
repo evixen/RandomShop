@@ -11,7 +11,7 @@
 |
 */
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -37,7 +37,7 @@ Route::group(['namespace' => 'Shop'], function () {
 });
 
 // Маршруты админки
-Route::group(['namespace' => 'Shop\Admin', 'prefix' => 'admin', 'middleware' => 'web'], function () {
+Route::group(['namespace' => 'Shop\Admin', 'prefix' => 'admin', 'middleware' => ['auth', 'manager']], function () {
 
     Route::get('/', 'MainController@index')->name('shop.admin.main');
 
@@ -59,4 +59,10 @@ Route::group(['namespace' => 'Shop\Admin', 'prefix' => 'admin', 'middleware' => 
     Route::get('/products/{id}/restore', 'ProductController@restore')
         ->name('shop.admin.products.restore');
 
+    // Пользователи
+    Route::group(['middleware' => ['admin']], function () {
+        Route::get('/users', 'UserController@index')->name('shop.admin.users');
+        Route::post('/users', 'UserController@addRole')->name('shop.admin.users.addRole');
+        Route::patch('/users', 'UserController@deleteRole')->name('shop.admin.users.deleteRole');
+    });
 });
