@@ -9,6 +9,27 @@ ul {
     height: 100%;
 }
 
+.btn-outline-purple {
+    color: $purple;
+    border-color: $purple;
+
+    &:hover {
+        color: #fff;
+        background-color: $purple;
+        border-color: $purple;
+    }
+}
+
+.btn-purple {
+    color: #fff;
+    background-color: $purple;
+    border-color: $purple;
+}
+
+.red {
+    color: $red;
+}
+
 // First Navbar
 #first-navbar {
 
@@ -81,6 +102,34 @@ ul {
         }
     }
 
+}
+
+// Cart
+#cart {
+    margin: 40px 0;
+
+    #cart-form {
+        margin-right: 15px;
+
+
+        #cart-form-accept {
+            margin-top: 20px;
+        }
+    }
+
+    #cart-item {
+        padding: 10px 0;
+        border-top: 1px solid #dee2e6;
+        border-bottom: 1px solid #dee2e6;
+
+        .img-thumbnail {
+            padding: 0;
+        }
+    }
+
+    .price {
+        color: darken($purple, 30%);
+    }
 }
 
 

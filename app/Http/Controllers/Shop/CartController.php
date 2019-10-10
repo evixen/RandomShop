@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\Shop;
 
+use App\Http\Requests\ShopOrderCreateRequest;
+use App\Models\ShopOrder;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class CartController extends GuestBaseController
@@ -26,12 +29,12 @@ class CartController extends GuestBaseController
      */
     public function add(Request $request)
     {
+        \ShoppingCart::associate('App\Models\ShopProduct');
+
         \ShoppingCart::add($request->id, $request->name, 1, $request->price,
             ['slug' => $request->slug, 'category' => $request->category]);
 
-        \ShoppingCart::associate('App\Models\ShopProduct');
-
-        return back()->with('success_message', 'Добавлено в корзину');
+        return back()->with('success', 'Добавлено в корзину');
     }
 
 
@@ -58,6 +61,46 @@ class CartController extends GuestBaseController
     {
         \ShoppingCart::destroy();
 
-        return back()->with('success_message', 'Корзина очищена');
+        return back()->with('success', 'Корзина очищена');
+    }
+
+
+    /**
+     * Сохраняет заказ
+     *
+     * @param ShopOrderCreateRequest $request
+     * @return RedirectResponse
+     * @throws \Exception
+     */
+    public function checkout(ShopOrderCreateRequest $request)
+    {
+        $data = $request->input();
+
+        // Генерация уникального ключа заказа
+        $data['order_id'] = bin2hex(random_bytes(10));
+
+        $data['user_id'] = \Auth::user()->id ?? 0;
+        $data['price'] = \ShoppingCart::totalPrice();
+
+        $now = Carbon::now();
+
+        $data['created_at'] = $now;
+        $data['updated_at'] = $now;
+
+
+        // Сохраняем данные
+        $order = new ShopOrder($data);
+
+        $result = $order->save();
+
+        if ($result) {
+            return redirect()
+                ->route('shop.cart.index')
+                ->with(['success' => 'Ваш заказ успешо сохранён']);
+        } else {
+            return back()
+                ->withErrors(['msg' => "Ошибка сохранения"])
+                ->withInput();
+        }
     }
 }

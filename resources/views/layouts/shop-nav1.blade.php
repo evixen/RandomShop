@@ -5,7 +5,7 @@
                 <ul class="navbar-nav d-flex justify-content-start flex-wrap align-items-center">
                     <li class="nav-item"><a href="#" class="nav-link text-light">8 (800) 555-35-35</a></li>
                     <li class="nav-item"><a href="#" class="nav-link">
-                            <button type="button" class="btn btn-outline-success text-light">Обратный звонок
+                            <button type="button" class="btn btn-outline-purple text-light">Обратный звонок
                             </button>
                         </a></li>
                 </ul>

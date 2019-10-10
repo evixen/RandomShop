@@ -25,14 +25,15 @@
                 <br>
                 <div class="product-details">{{ $product->details }}</div>
                 <br>
-                <form action="{{ route('cart.add') }}" method="post">
+                <form action="{{ route('shop.cart.add') }}" method="post">
                     {{ csrf_field() }}
+                    {{ method_field('PUT') }}
                     <input type="hidden" name="id" value="{{ $product->id }}">
                     <input type="hidden" name="name" value="{{ $product->name }}">
                     <input type="hidden" name="slug" value="{{ $product->slug }}">
                     <input type="hidden" name="price" value="{{ $product->price }}">
                     <input type="hidden" name="category" value="{{ $product->category->slug }}">
-                    <button type="submit" class="btn btn-primary">Добавить в корзину</button>
+                    <button type="submit" class="btn btn-purple">Добавить в корзину</button>
                 </form>
                 @if (session()->has('success_message'))
                     <br>

@@ -25,4 +25,11 @@ class ShopProduct extends Model
     {
         return $this->belongsTo(ShopProductCategory::class);
     }
+
+
+    public function orders()
+    {
+        return $this->belongsToMany(ShopOrder::class, 'order_product',
+            'product_id', 'order_id');
+    }
 }

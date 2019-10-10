@@ -41,7 +41,7 @@
 
                     {{-- Cart --}}
                     <div class="col-sm-3 p-0 cart">
-                        <a href="{{ route('cart.index') }}" class="text-dark text-decoration-none">
+                        <a href="{{ route('shop.cart.index') }}" class="text-dark text-decoration-none">
                             <i class="material-icons">shopping_cart</i>
                             <span class="count">
                                 @if(!ShoppingCart::isEmpty())

@@ -18,7 +18,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/admin-shop.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/admin.css') }}" rel="stylesheet">
 </head>
 <body>
 <div id="app">
@@ -70,7 +70,7 @@
                                                 class="nav-link">Товары</a></li>
                         <li class="nav-item"><a href="{{ route('shop.admin.users') }}"
                                                 class="nav-link">Пользователи</a></li>
-                        <li class="nav-item"><a href="#" class="nav-link">Роли</a></li>
+                        <li class="nav-item"><a href="{{ route('shop.admin.orders.index') }}" class="nav-link">Заказы</a></li>
                     </ul>
                 </nav>
             </div>

@@ -13,8 +13,6 @@
 
 Auth::routes(['verify' => true]);
 
-Route::get('/home', 'HomeController@index')->name('home');
-
 // Маршруты видимой части магазина
 Route::group(['namespace' => 'Shop'], function () {
 
@@ -29,10 +27,11 @@ Route::group(['namespace' => 'Shop'], function () {
         ->name('shop.product');
 
     // Корзина товаров
-    Route::get('/cart', 'CartController@index')->name('cart.index');
-    Route::post('/cart', 'CartController@add')->name('cart.add');
-    Route::delete('/cart/{id}', 'CartController@delete')->name('cart.delete');
-    Route::put('/cart', 'CartController@clean')->name('cart.clean');
+    Route::get('/cart', 'CartController@index')->name('shop.cart.index');
+    Route::put('/cart', 'CartController@add')->name('shop.cart.add');
+    Route::delete('/cart/{id}', 'CartController@delete')->name('shop.cart.delete');
+    Route::delete('/cart', 'CartController@clean')->name('shop.cart.clean');
+    Route::post('/cart/checkout', 'CartController@checkout')->name('shop.cart.checkout');
 
 });
 
@@ -65,4 +64,13 @@ Route::group(['namespace' => 'Shop\Admin', 'prefix' => 'admin', 'middleware' => 
         Route::post('/users', 'UserController@addRole')->name('shop.admin.users.addRole');
         Route::patch('/users', 'UserController@deleteRole')->name('shop.admin.users.deleteRole');
     });
+
+    // Заказы
+    Route::resource('orders', 'OrderController')
+        ->only(['index', 'edit', 'update', 'destroy'])
+        ->names('shop.admin.orders');
+    Route::get('/orders/deleted', 'OrderController@deleted')
+        ->name('shop.admin.orders.deleted');
+    Route::get('/orders/{id}/restore', 'OrderController@restore')
+        ->name('shop.admin.orders.restore');
 });
