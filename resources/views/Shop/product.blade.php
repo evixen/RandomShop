@@ -13,19 +13,30 @@
         </div>
     @endif
 
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <img src="{{ asset('/img/products/' . $product->slug . '.jpg') }}" alt="phone">
+    <div class="container my-5 product-one">
+        <div class="row align-items-center justify-content-around mx-0">
+            <div class="col-sm-6">
+                <img src="{{ asset('/img/products/' . $product->slug . '.jpg') }}" alt="img">
             </div>
-            <div class="col-md-6">
-                <div class="product-name">{{ $product->name }}</div>
-                <br>
-                <div class="product-price">{{ $product->price }} р.</div>
-                <br>
-                <div class="product-details">{{ $product->details }}</div>
-                <br>
-                <form action="{{ route('shop.cart.add') }}" method="post">
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="card-header">
+                        Имя товара
+                    </div>
+                    <div class="card-body">
+                        <strong>{{ $product->name }}</strong>
+                    </div>
+                    <div class="card-header">
+                        Описание товара
+                    </div>
+                    <div class="card-body">
+                        {{ $product->details }}
+                    </div>
+                    <div class="card-header">
+                        Цена: <strong class="product-price ml-2">{{ $product->price }}</strong> р.
+                    </div>
+                </div>
+                <form action="{{ route('shop.cart.add') }}" method="post" class="mt-3">
                     {{ csrf_field() }}
                     {{ method_field('PUT') }}
                     <input type="hidden" name="id" value="{{ $product->id }}">
@@ -43,8 +54,22 @@
                 @endif
             </div>
         </div>
+    </div>
 
-    </div>
-    </div>
+    <div class="container see-also">
+        <h3 class="h3 text-center">Товары этой категории</h3>
+        <div class="row justify-content-around flex-wrap">
+            @foreach ($others as $product)
+                <div class="col-sm-3 mb-3 product-list">
+                    <a href="{{ route('shop.product', [$product->category->slug, $product->slug]) }}">
+                        <img src="{{ asset('/img/products/' . $product->slug . '.jpg') }}" alt="img" class="mx-auto">
+                    </a>
+                    <a href="{{ route('shop.product', [$product->category->slug, $product->slug]) }}">
+                        <div class="product-name text-center">{{ $product->name }}</div>
+                    </a>
+                    <div class="product-price text-center">{{ $product->price }} руб.</div>
+                </div>
+            @endforeach
+        </div>
     </div>
 @endsection

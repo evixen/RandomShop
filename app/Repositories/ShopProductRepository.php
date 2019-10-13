@@ -51,12 +51,58 @@ class ShopProductRepository extends BaseRepository
 
 
     /**
+     * Получить коллекцию товаров одной категории
+     *
+     * @param $catSlug
+     * @return mixed
+     */
+    public function getProductsByCategory($catSlug)
+    {
+        $columns = [
+            'id',
+            'name',
+            'slug',
+            'category_id',
+            'price'
+        ];
+
+        $products = $this->startConditions()
+            ->select($columns)
+            ->with('category:id,slug')
+            ->whereHas('category', function ($query) use ($catSlug) {
+                $query->where('slug', $catSlug);
+            })
+            ->inRandomOrder()
+            ->get();
+
+        return $products;
+    }
+
+
+    /**
+     * Получить товар по полю slug
+     *
+     * @param $slug
+     * @return mixed
+     */
+    public function getOneBySlug($slug)
+    {
+        $products = $this->startConditions()
+            ->where('slug', $slug)
+            ->with('category:id,slug')
+            ->first();
+
+        return $products;
+    }
+
+
+    /**
      * Получить коллекцию товаров по указанным категориям
      *
      * @param $categoriesId
      * @return Collection
      */
-    public function getProductsByCategories($categoriesId)
+    public function getProductsByCategoriesIdArray($categoriesId)
     {
         $columns = [
             'id',
@@ -80,6 +126,30 @@ class ShopProductRepository extends BaseRepository
         }
 
         return $result;
+    }
+
+
+    public function getSeeAlso($categoryId, $productId)
+    {
+        $columns = [
+            'id',
+            'name',
+            'slug',
+            'category_id',
+            'price'
+        ];
+
+        $products = $this->startConditions()
+            ->select($columns)
+            ->with('category:id,slug')
+            ->whereHas('category', function ($query) use ($categoryId) {
+                $query->where('id', $categoryId); })
+            ->where('id', '!=', $productId)
+            ->take(4)
+            ->inRandomOrder()
+            ->get();
+
+        return $products;
     }
 
 

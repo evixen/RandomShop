@@ -100,6 +100,32 @@ ul {
   color: #9561e2;
 }
 
+.product-list img {
+  display: block;
+  width: 150px;
+  border: 1px solid #dee2e6;
+  margin: 20px 0 5px;
+}
+
+.product-list .product-price {
+  margin-bottom: 5px;
+}
+
+.product-one img {
+  display: block;
+  border: 2px solid #dee2e6;
+}
+
+.see-also {
+  margin-top: 200px;
+}
+
+.see-also .row {
+  margin-top: 15px;
+  border-top: 1px solid #dee2e6;
+  border-bottom: 1px solid #dee2e6;
+}
+
 /* Slider */
 
 #flexiselDemo1,

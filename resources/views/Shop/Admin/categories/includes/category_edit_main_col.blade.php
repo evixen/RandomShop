@@ -2,7 +2,6 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-body">
-                <div class="card_title"></div>
                 <ul class="nav nav-tabs" role="tablist">
                     <li class="nav-category">
                         <a href="#maindata" data-toggle="tab" role="tab" class="nav-link active">Основные данные</a>

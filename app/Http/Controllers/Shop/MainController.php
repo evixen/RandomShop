@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers\Shop;
 
-use App\Models\ShopProduct;
 use App\Repositories\ShopProductCategoryRepository;
 use App\Repositories\ShopProductRepository;
+use Illuminate\View\View;
 
 class MainController extends GuestBaseController
 {
-    /*
+    /**
      * @var ShopProductRepository
      */
     protected $products;
 
-    /*
+    /**
      * @var ShopProductCategoryRepository
      */
     protected $categories;
@@ -28,6 +28,11 @@ class MainController extends GuestBaseController
     }
 
 
+    /**
+     * Главная страница
+     *
+     * @return View
+     */
     public function index()
     {
 
@@ -47,7 +52,7 @@ class MainController extends GuestBaseController
 
             $childrenId = $this->categories->getLevelThreeChildrenId($cat->id); // id детей текущей главной категории
 
-            $productsCollection = $this->products->getProductsByCategories($childrenId)->shuffle();
+            $productsCollection = $this->products->getProductsByCategoriesIdArray($childrenId)->shuffle();
 
             $productsByCategory[$cat->id] = $productsCollection;
 
@@ -58,14 +63,15 @@ class MainController extends GuestBaseController
     }
 
 
-    public function category($category)
+    /**
+     * Страница категории товаров
+     *
+     * @param $categorySlug
+     * @return View
+     */
+    public function category($categorySlug)
     {
-        $products = ShopProduct::with('category:id,slug')
-            ->whereHas('category', function ($query) use ($category) {
-                $query->where('slug', $category);
-            })
-            ->inRandomOrder()
-            ->get();
+        $products = $this->products->getProductsByCategory($categorySlug);
 
         // Сортировка по цене
         if (request()->sort == 'low_high') {
@@ -74,19 +80,30 @@ class MainController extends GuestBaseController
             $products = $products->sortByDesc('price');
         }
 
-
         if ($products->isEmpty())
             abort(404);
 
-        return view('Shop.category', compact('category', 'products'));
+        return view('Shop.category', compact('categorySlug', 'products'));
     }
 
-    public function product($category, $slug)
-    {
-        $product = ShopProduct::where('slug', $slug)
-            ->with('category:id,slug')
-            ->firstOrFail();
 
-        return view('Shop.product', compact('product'));
+    /**
+     * Страница товара
+     *
+     * @param $categorySlug
+     * @param $slug
+     * @return View
+     */
+    public function product($categorySlug, $slug)
+    {
+        $product = $this->products->getOneBySlug($slug);
+
+        // Другие товары из той же категории
+        $others = $this->products->getSeeAlso($product->category_id, $product->id);
+
+        if (empty($product))
+            abort(404);
+
+        return view('Shop.product', compact('product', 'others'));
     }
 }

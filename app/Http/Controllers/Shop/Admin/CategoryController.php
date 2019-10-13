@@ -11,7 +11,7 @@ use Illuminate\Http\Response;
 class CategoryController extends AdminBaseController
 {
 
-    /*
+    /**
      * @var ShopProductCategoryRepository
      */
     protected $categories;
