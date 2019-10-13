@@ -38,7 +38,7 @@ class ShopProductObserver
     protected function setSlug(ShopProduct $product)
     {
         if (empty($product->slug)) {
-            $product->slug = \Str::slug($product->title);
+            $product->slug = \Str::slug($product->name);
         }
     }
 }

@@ -22,7 +22,7 @@ class ShopOrderObserver
             $order->products()->attach($product->id, ['created_at' => $now, 'updated_at' => $now]);
         }
 
-        \ShoppingCart::destroy();
+//        \ShoppingCart::destroy();
     }
 
 

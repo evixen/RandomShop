@@ -50,6 +50,44 @@ class ShopProductRepository extends BaseRepository
     }
 
 
+    /**
+     * Получить коллекцию товаров по указанным категориям
+     *
+     * @param $categoriesId
+     * @return Collection
+     */
+    public function getProductsByCategories($categoriesId)
+    {
+        $columns = [
+            'id',
+            'name',
+            'slug',
+            'category_id',
+            'price'
+        ];
+
+        $result = collect();
+
+        $products = $this->startConditions()
+            ->select($columns)
+            ->with('category:id,slug')
+            ->get();
+
+        foreach ($products as $product) {
+            if ($categoriesId->contains($product->category_id)) {
+                $result->push($product);
+            }
+        }
+
+        return $result;
+    }
+
+
+    /**
+     * Получить удалённые записи таблицы
+     *
+     * @return mixed
+     */
     public function getTrashed()
     {
         $columns = ['id', 'name', 'category_id'];

@@ -26,6 +26,60 @@ class ShopProductCategoryRepository extends BaseRepository
 
 
     /**
+     * Получить список id и title главных категорий
+     *
+     * @return mixed
+     */
+    public function getMainCategories()
+    {
+        $result = $this
+            ->startConditions()
+            ->select(['id', 'title'])
+            ->where('parent_id', 0)
+            ->toBase()
+            ->get();
+
+        return $result;
+    }
+
+
+    /**
+     * Получить список id дочерних категорий 3 уровня
+     *
+     * @param $id
+     * @return Collection
+     */
+    public function getLevelThreeChildrenId($id)
+    {
+        $categoriesId = $this
+            ->startConditions()
+            ->pluck('id');
+
+
+        $parentsId = $this
+            ->startConditions()
+            ->pluck('parent_id');
+
+        $menuLevelTwo = collect();
+        $result = collect();
+
+        $combined = $categoriesId->combine($parentsId);
+
+        foreach ($combined as $catId => $parentId) {
+            if ($parentId == $id)
+                $menuLevelTwo->push($catId);
+
+            foreach ($menuLevelTwo as $item) {
+                if ($parentId == $item)
+                    $result->push($catId);
+            }
+        }
+
+        return $result;
+    }
+
+
+    /**
      * Получить список категорий для вывода в выпадающем списке
      *
      * @return mixed

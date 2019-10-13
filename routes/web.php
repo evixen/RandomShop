@@ -32,6 +32,7 @@ Route::group(['namespace' => 'Shop'], function () {
     Route::delete('/cart/{id}', 'CartController@delete')->name('shop.cart.delete');
     Route::delete('/cart', 'CartController@clean')->name('shop.cart.clean');
     Route::post('/cart/checkout', 'CartController@checkout')->name('shop.cart.checkout');
+    Route::get('/cart/payment/{orderId}', 'CartController@payment')->name('shop.cart.payment');
 
 });
 

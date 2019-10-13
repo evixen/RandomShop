@@ -76,7 +76,7 @@ class CartController extends GuestBaseController
     {
         $data = $request->input();
 
-        // Генерация уникального ключа заказа
+        // Генерация уникального номера заказа
         $data['order_id'] = bin2hex(random_bytes(10));
 
         $data['user_id'] = \Auth::user()->id ?? 0;
@@ -95,12 +95,17 @@ class CartController extends GuestBaseController
 
         if ($result) {
             return redirect()
-                ->route('shop.cart.index')
-                ->with(['success' => 'Ваш заказ успешо сохранён']);
+                ->route('shop.cart.payment', $data['order_id']);
         } else {
             return back()
                 ->withErrors(['msg' => "Ошибка сохранения"])
                 ->withInput();
         }
+    }
+
+
+    public function payment($orderId)
+    {
+        return view('Shop.payment');
     }
 }

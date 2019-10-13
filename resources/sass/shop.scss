@@ -1,5 +1,6 @@
 @import 'variables';
 
+
 .row {
     width: 100%;
     max-width: 100%;
@@ -30,7 +31,8 @@ ul {
     color: $red;
 }
 
-// First Navbar
+
+/* First Navbar */
 #first-navbar {
 
     #fnb-left {
@@ -44,8 +46,11 @@ ul {
 }
 
 
-// Second Navbar
+/* Second Navbar */
 #second-navbar {
+    background-image: linear-gradient(to bottom, #fff, #f2f2f2);
+    background-repeat: repeat-x;
+    border-bottom: 1px solid #dee2e6;
 
     #snb-left {
 
@@ -104,7 +109,116 @@ ul {
 
 }
 
-// Cart
+
+/* Main */
+.product-img {
+    max-width: 100px;
+    max-height: 100px;
+}
+
+.product-name {
+    position: relative;
+}
+
+.product-price {
+    position: relative;
+    color: $purple;
+}
+
+
+/* Slider */
+
+#flexiselDemo1, #flexiselDemo2, #flexiselDemo3 {
+    display: none;
+}
+
+.nbs-flexisel-container {
+    position: relative;
+    max-width: 100%;
+    margin-bottom: 50px;
+}
+
+.nbs-flexisel-ul {
+    position: relative;
+    width: 99999px;
+    margin: 0px;
+    padding: 0px;
+    list-style-type: none;
+    text-align: center;
+    overflow: auto;
+    min-height: 170px;
+}
+
+.nbs-flexisel-inner {
+    position: relative;
+    overflow: hidden;
+    float: left;
+    width: 100%;
+    background-color: #fff;
+    border-top: 1px solid #dee2e6;
+    border-bottom: 1px solid #dee2e6;
+    min-height: 170px;
+}
+
+.nbs-flexisel-item {
+    float: left;
+    margin: 0px;
+    padding: 0px;
+    cursor: pointer;
+    position: relative;
+    min-height: 170px;
+}
+
+.nbs-flexisel-item img {
+    max-width: 100%;
+    cursor: pointer;
+    position: relative;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+// Navigation
+.nbs-flexisel-nav-left,
+.nbs-flexisel-nav-right {
+    padding: 3px 10px;
+    border-radius: 15px;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+    position: absolute;
+    cursor: pointer;
+    z-index: 4;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.4);
+    color: #fff;
+}
+
+.nbs-flexisel-nav-left {
+    left: 10px;
+}
+
+.nbs-flexisel-nav-left:before {
+    content: "<"
+}
+
+.nbs-flexisel-nav-left.disabled {
+    opacity: 0.4;
+}
+
+.nbs-flexisel-nav-right {
+    right: 5px;
+}
+
+.nbs-flexisel-nav-right:before {
+    content: ">"
+}
+
+.nbs-flexisel-nav-right.disabled {
+    opacity: 0.4;
+}
+
+
+/* Cart */
 #cart {
     margin: 40px 0;
 
@@ -128,11 +242,12 @@ ul {
     }
 
     .price {
-        color: darken($purple, 30%);
+        color: $purple;
     }
 }
 
 
+/* Media */
 @media screen and (max-width: 992px) {
     .user-dropdown {
         position: absolute;
