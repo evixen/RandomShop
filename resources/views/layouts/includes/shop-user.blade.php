@@ -35,7 +35,7 @@
                     </p>
                     @if (Route::has('register'))
                         <button type="submit" class="btn btn-primary">
-                            <a class="text-light" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            <a class="text-light" href="{{ route('register') }}">{{ __('messages.Register') }}</a>
                         </button>
                     @endif
                 </div>
@@ -46,7 +46,7 @@
                     @csrf
 
                     <div class="form-group">
-                        <label for="email">{{ __('E-Mail Address') }}</label>
+                        <label for="email">{{ __('messages.E-Mail Address') }}</label>
                         <input id="email" type="email"
                                class="form-control @error('email') is-invalid @enderror" name="email"
                                value="{{ old('email') }}" required autocomplete="email">
@@ -58,7 +58,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="password">{{ __('Password') }}</label>
+                        <label for="password">{{ __('messages.Password') }}</label>
                         <input id="password" type="password"
                                class="form-control @error('password') is-invalid @enderror" name="password"
                                required autocomplete="current-password">
@@ -75,19 +75,19 @@
                                    id="remember" {{ old('remember') ? 'checked' : '' }}>
 
                             <label class="form-check-label" for="remember">
-                                {{ __('Remember Me') }}
+                                {{ __('messages.Remember me') }}
                             </label>
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <div class="col-sm-12">
-                            <button type="submit" class="btn btn-primary">Sign in</button>
+                            <button type="submit" class="btn btn-primary">{{ __('messages.Sign in') }}</button>
                         </div>
                         @if (Route::has('password.request'))
                             <div class="col-sm-12 pt-2">
                                 <a class="btn-link" href="{{ route('password.request') }}">
-                                    {{ __('Forgot Your Password?') }}
+                                    {{ __('messages.Forgot Your Password?') }}
                                 </a>
                             </div>
                         @endif
@@ -102,16 +102,28 @@
         {{ Auth::user()->name }}
 
         <div class="dropdown-divider"></div>
-
-        <a class="" href="{{ route('logout') }}"
-           onclick="event.preventDefault();
+        <div class="row flex-column">
+            @php $userRoles = Auth::user()->roles->pluck('name'); @endphp
+            @if($userRoles->contains('Admin') OR $userRoles->contains('Manager'))
+                <div class="col-sm-12">
+                    <a href="{{ route('shop.admin.main') }}">Админка</a>
+                </div>
+            @endif
+            <div class="col-sm-12">
+                <a href="{{ route('shop.orders') }}">Ваши заказы</a>
+            </div>
+            <div class="col-sm-12">
+                <a class="" href="{{ route('logout') }}"
+                   onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-            {{ __('Logout') }}
-        </a>
-        <form id="logout-form" action="{{ route('logout') }}" method="POST"
-              style="display: none;">
-            @csrf
-        </form>
+                    {{ __('messages.Logout') }}
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                      style="display: none;">
+                    @csrf
+                </form>
+            </div>
+        </div>
     @endauth
 </div>
 

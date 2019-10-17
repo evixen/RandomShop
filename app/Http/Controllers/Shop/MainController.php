@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Shop;
 
+use App\Repositories\ShopOrderRepository;
 use App\Repositories\ShopProductCategoryRepository;
 use App\Repositories\ShopProductRepository;
 use Illuminate\View\View;
@@ -18,13 +19,21 @@ class MainController extends GuestBaseController
      */
     protected $categories;
 
+    /**
+     * @var ShopOrderRepository
+     */
+    protected $orders;
 
-    public function __construct(ShopProductRepository $products, ShopProductCategoryRepository $categories)
+
+    public function __construct(ShopProductRepository $products,
+                                ShopProductCategoryRepository $categories,
+                                ShopOrderRepository $orders)
     {
         parent::__construct();
 
         $this->products = $products;
         $this->categories = $categories;
+        $this->orders = $orders;
     }
 
 
@@ -60,6 +69,25 @@ class MainController extends GuestBaseController
         }
 
         return view('Shop.main', compact('productsByCategory', 'categories'));
+    }
+
+
+    /**
+     * Страница заказов пользоватея
+     *
+     * @return RedirectResponse|View
+     */
+    public function orders()
+    {
+        if (\Auth::check()) {
+            $email = \Auth::user()->email;
+
+            $orders = $this->orders->getOrdersByUserEmail($email);
+
+            return view('Shop.orders', compact('orders'));
+        } else {
+            return redirect()->route('shop.main');
+        }
     }
 
 

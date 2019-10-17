@@ -4,11 +4,26 @@ namespace App\Http\Controllers\Shop;
 
 use App\Http\Requests\ShopOrderCreateRequest;
 use App\Models\ShopOrder;
+use App\Repositories\ShopOrderRepository;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class CartController extends GuestBaseController
 {
+
+    /**
+     * @var ShopOrderRepository
+     */
+    protected $orders;
+
+
+    public function __construct(ShopOrderRepository $orders)
+    {
+        parent::__construct();
+
+        $this->orders = $orders;
+    }
+
 
     /**
      * Показывает список товаров в корзине
@@ -17,7 +32,15 @@ class CartController extends GuestBaseController
      */
     public function index()
     {
-        return view('Shop.cart');
+        if (\Auth::check()) {
+            $email = \Auth::user()->email;
+
+            $lastOrder = $this->orders->getLastOrderByUserEmail($email);
+
+            return view('Shop.cart', compact('lastOrder'));
+        } else {
+            return view('Shop.cart');
+        }
     }
 
 
@@ -35,6 +58,20 @@ class CartController extends GuestBaseController
             ['slug' => $request->slug, 'category' => $request->category]);
 
         return back()->with('success', 'Добавлено в корзину');
+    }
+
+
+    /**
+     * Обновляет количество товара в корзине
+     *
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function changeQty(Request $request)
+    {
+        \ShoppingCart::update($request->id, $request->qty);
+
+        return back()->with('success', 'Количество обновлено');
     }
 
 

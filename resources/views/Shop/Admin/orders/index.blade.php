@@ -6,7 +6,7 @@
         @include('Shop.Admin.result_messages')
 
         <nav class="navbar navbar-light bg-faded">
-            <a href="{{ route('shop.admin.orders.deleted') }}" class="btn btn-secondary">Показать архивные</a>
+            <a href="{{ route('shop.admin.orders.archived') }}" class="btn btn-secondary">Показать архивные</a>
         </nav>
         <div class="row justify-content-center">
             <div class="col-sm-12">

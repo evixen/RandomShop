@@ -29,10 +29,10 @@
 <div id="app">
 
     {{-- First Navbar --}}
-    @include('layouts.shop-nav1')
+    @include('layouts.includes.shop-nav1')
 
     {{-- Second Navbar --}}
-    @include('layouts.shop-nav2')
+    @include('layouts.includes.shop-nav2')
 
     {{-- Content --}}
     <main class="py-4">

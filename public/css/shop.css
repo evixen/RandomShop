@@ -126,6 +126,10 @@ ul {
   border-bottom: 1px solid #dee2e6;
 }
 
+.see-also img {
+  max-width: 120px;
+}
+
 /* Slider */
 
 #flexiselDemo1,
@@ -240,6 +244,7 @@ ul {
 
 #cart #cart-item .img-thumbnail {
   padding: 0;
+  max-width: 120px;
 }
 
 #cart .price {

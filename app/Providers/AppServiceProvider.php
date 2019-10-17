@@ -38,7 +38,7 @@ class AppServiceProvider extends ServiceProvider
         ShopOrder::observe(ShopOrderObserver::class);
 
         // Вывод в панель навигации и админку массива категорий меню
-        \View::composer(['layouts.shop-nav2', 'Shop.Admin.categories.index'], function ($view) {
+        \View::composer(['layouts.includes.shop-nav2', 'Shop.Admin.categories.index'], function ($view) {
 
             $categories = app(ShopProductCategoryRepository::class);
 

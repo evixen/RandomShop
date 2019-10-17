@@ -15,11 +15,12 @@ class ShopOrderObserver
      */
     public function created(ShopOrder $order)
     {
-        // В сводной таблице заказ получает все купленные товары
+        // В сводной таблице заказ получает все купленные товары и их количество
         $now = Carbon::now();
 
         foreach (\ShoppingCart::all() as $product) {
-            $order->products()->attach($product->id, ['created_at' => $now, 'updated_at' => $now]);
+            $order->products()->attach($product->id,
+                ['quantity' => $product->qty, 'created_at' => $now, 'updated_at' => $now]);
         }
 
 //        \ShoppingCart::destroy();

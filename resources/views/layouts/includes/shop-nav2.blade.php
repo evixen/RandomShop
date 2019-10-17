@@ -36,7 +36,7 @@
 
                     {{-- Profile --}}
                     <div class="col-sm-4 dropdown noclose profile">
-                        @include('layouts.shop-user')
+                        @include('layouts.includes.shop-user')
                     </div>
 
                     {{-- Cart --}}

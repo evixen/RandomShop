@@ -10,8 +10,8 @@
                 <div class="row justify-content-center">
                     <div class="col-sm-12">
                         <div class="card">
+                            <div class="card-header">{{ $title }}</div>
                             <div class="card-body">
-                                <h3 class="h3">{{ $title }}</h3>
                                 <table class="table table-hover">
                                     <thead>
                                     <tr>

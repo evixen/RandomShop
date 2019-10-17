@@ -95,7 +95,7 @@ class OrderController extends AdminBaseController
      */
     public function destroy($id)
     {
-        $result = ShopOrder::destroy($id);
+        $result = $this->orders->getEdit($id)->forceDelete();
 
         if ($result) {
             return redirect()
@@ -108,20 +108,40 @@ class OrderController extends AdminBaseController
 
 
     /**
-     * Показывает удаленные записи
+     * Перенос заказа в архив
      *
+     * @param int $id
      * @return \Response
      */
-    public function deleted()
+    public function toArchive($id)
     {
-        $deleted = $this->orders->getTrashed();
+        $result = ShopOrder::destroy($id);
 
-        return view('Shop.Admin.orders.deleted', compact('deleted'));
+        if ($result) {
+            return redirect()
+                ->route('shop.admin.orders.index')
+                ->with(['success' => "Запись id[$id] перенесена в архив"]);
+        } else {
+            return back()->withErrors(['msg' => 'Ошибка переноса']);
+        }
     }
 
 
     /**
-     * Восстанавливает удаленную запись
+     * Показывает архивные записи
+     *
+     * @return \Response
+     */
+    public function archived()
+    {
+        $archived = $this->orders->getTrashed();
+
+        return view('Shop.Admin.orders.archived', compact('archived'));
+    }
+
+
+    /**
+     * Восстанавливает архивную запись
      *
      * @param int $id
      * @return \Response

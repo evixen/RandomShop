@@ -46,10 +46,10 @@
                     <input type="hidden" name="category" value="{{ $product->category->slug }}">
                     <button type="submit" class="btn btn-purple">Добавить в корзину</button>
                 </form>
-                @if (session()->has('success_message'))
+                @if (session()->has('success'))
                     <br>
                     <div class="col-sm-5 alert alert-success">
-                        {{ session()->get('success_message') }}
+                        {{ session()->get('success') }}
                     </div>
                 @endif
             </div>

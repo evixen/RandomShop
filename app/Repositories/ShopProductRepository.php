@@ -26,6 +26,17 @@ class ShopProductRepository extends BaseRepository
 
 
     /**
+     * Получить общее количество товаров
+     *
+     * @return mixed
+     */
+    public function getCount()
+    {
+        return $this->startConditions()->count();
+    }
+
+
+    /**
      * Получить пагинацию всех записей таблицы
      *
      * @param int|null $perPage

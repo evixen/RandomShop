@@ -155,6 +155,10 @@ ul {
         border-top: 1px solid #dee2e6;
         border-bottom: 1px solid #dee2e6;
     }
+
+    img {
+        max-width: 120px;
+    }
 }
 
 
@@ -270,6 +274,7 @@ ul {
 
         .img-thumbnail {
             padding: 0;
+            max-width: 120px;
         }
     }
 

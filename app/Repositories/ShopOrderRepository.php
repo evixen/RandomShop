@@ -14,7 +14,7 @@ class ShopOrderRepository extends BaseRepository
 {
 
     /**
-     * Получить модель для редактирования в админке
+     * Получить заказ для редактирования в админке
      *
      * @param int $id
      * @return Model
@@ -26,7 +26,18 @@ class ShopOrderRepository extends BaseRepository
 
 
     /**
-     * Получить модель с удаленными записями для редактирования в админке
+     * Получить количество заказов (включая архивные)
+     *
+     * @return mixed
+     */
+    public function getCount()
+    {
+        return $this->startConditions()->withTrashed()->count();
+    }
+
+
+    /**
+     * Получить заказы (включая удаленные) для редактирования в админке
      *
      * @param int $id
      * @return Model
@@ -37,6 +48,12 @@ class ShopOrderRepository extends BaseRepository
     }
 
 
+    /**
+     * Получить непроверенные заказы для редактирования в админке
+     *
+     * @param int $perPage
+     * @return Model
+     */
     public function getUnchecked($perPage = 10)
     {
         $columns = ['id', 'email', 'order_id', 'price'];
@@ -51,6 +68,12 @@ class ShopOrderRepository extends BaseRepository
     }
 
 
+    /**
+     * Получить проверенные заказы для редактирования в админке
+     *
+     * @param int $perPage
+     * @return Model
+     */
     public function getChecked($perPage = 10)
     {
         $columns = ['id', 'email', 'order_id', 'price'];
@@ -65,6 +88,11 @@ class ShopOrderRepository extends BaseRepository
     }
 
 
+    /**
+     * Получить удалённые заказы
+     *
+     * @return mixed
+     */
     public function getTrashed()
     {
         $columns = ['id', 'email', 'order_id', 'price'];
@@ -75,6 +103,44 @@ class ShopOrderRepository extends BaseRepository
             ->where('deleted_at', '!=', null)
             ->withTrashed()
             ->paginate(10);
+
+        return $result;
+    }
+
+
+    /**
+     * Получить заказы по емейлу пользователя
+     *
+     * @param $email
+     * @return mixed
+     */
+    public function getOrdersByUserEmail($email)
+    {
+        $result = $this
+            ->startConditions()
+            ->with('products:id,name')
+            ->where('email', $email)
+            ->orderBy('id', 'desc')
+            ->get();
+
+        return $result;
+    }
+
+
+    /**
+     * Получить последний заказ по емейлу пользователя
+     *
+     * @param $email
+     * @return mixed
+     */
+    public function getLastOrderByUserEmail($email)
+    {
+        $result = $this
+            ->startConditions()
+            ->with('products:id,name')
+            ->where('email', $email)
+            ->latest()
+            ->first();
 
         return $result;
     }

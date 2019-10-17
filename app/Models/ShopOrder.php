@@ -26,6 +26,6 @@ class ShopOrder extends Model
     public function products()
     {
         return $this->belongsToMany(ShopProduct::class, 'order_product',
-            'order_id', 'product_id');
+            'order_id', 'product_id')->withPivot('quantity')->withTimestamps();
     }
 }

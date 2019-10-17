@@ -21,7 +21,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($deleted as $order)
+                            @foreach($archived as $order)
                                 <tr>
                                     <td>{{ $order->id }}</td>
                                     <td>
@@ -53,11 +53,11 @@
                 </div>
             </div>
             <div class="col-sm-12">
-                @if($deleted->total(1) > $deleted->count())
+                @if($archived->total(1) > $archived->count())
                     <br>
                     <div class="row justify-content-center">
                         <div class="col-sm-12">
-                            {{ $deleted->links() }}
+                            {{ $archived->links() }}
                         </div>
                     </div>
                 @endif

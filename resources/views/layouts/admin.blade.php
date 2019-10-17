@@ -26,62 +26,61 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-6" id="navbar-left">
-                    <span class="navbar-brand">Admin panel</span>
+                    <a href="{{ route('shop.admin.main') }}" class="navbar-brand text-dark">Панель админстрирования</a>
                 </div>
                 <div class="col-sm-6" id="navbar-right">
-                    <ul class="navbar-nav d-flex justify-content-end flex-wrap align-items-center">
-                        <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ Auth::user()->name }} <span class="caret"></span>
+                    <div class="row justify-content-end align-items-center">
+                        <div class="col-sm-4 navbar-text">
+                            <span>Привет, {{ Auth::user()->name }}!</span>
+                        </div>
+                        <div class="col-sm-3 navbar-text p-0">
+                            <a href="{{ route('shop.main') }}">
+                                <button class="btn btn-sm btn-primary">На главную</button>
                             </a>
+                        </div>
+                        <div class="col-sm-2 p-0">
+                            <form action="{{ route('logout') }}" method="post">
+                                @csrf
+                                <button type="submit" class="btn btn-sm btn-primary">Выйти</button>
+                            </form>
+                        </div>
+                    </div>
 
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('logout') }}"
-                                   onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
-                                </a>
-
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                      style="display: none;">
-                                    @csrf
-                                </form>
-                            </div>
-                        </li>
-                    </ul>
                 </div>
             </div>
         </div>
     </nav>
+</div>
+</nav>
 
-    <div class="container-fluid">
-        <div class="row no-gutters">
-            <div class="col-sm-3">
-                {{-- Sidebar --}}
-                <nav id="sidebar">
-                    <ul class="navbar-nav d-flex">
-                        <li class="nav-item"><a href="{{ route('shop.admin.main') }}"
-                                                class="nav-link text-light">Управление</a></li>
-                        <li class="nav-item"><a href="{{ route('shop.admin.categories.index') }}"
-                                                class="nav-link">Категории</a>
-                        </li>
-                        <li class="nav-item"><a href="{{ route('shop.admin.products.index') }}"
-                                                class="nav-link">Товары</a></li>
-                        <li class="nav-item"><a href="{{ route('shop.admin.users') }}"
-                                                class="nav-link">Пользователи</a></li>
-                        <li class="nav-item"><a href="{{ route('shop.admin.orders.index') }}" class="nav-link">Заказы</a></li>
-                    </ul>
-                </nav>
-            </div>
-            <div class="col-sm-8">
-                {{-- Content --}}
-                <main class="py-4">
-                    @yield('content')
-                </main>
-            </div>
+<div class="container-fluid">
+    <div class="row no-gutters">
+        <div class="col-sm-3">
+            {{-- Sidebar --}}
+            <nav id="sidebar">
+                <ul class="navbar-nav d-flex">
+                    <li class="nav-item"><a href="{{ route('shop.admin.main') }}"
+                                            class="nav-link text-light">Управление</a></li>
+                    <li class="nav-item"><a href="{{ route('shop.admin.categories.index') }}"
+                                            class="nav-link">Категории</a>
+                    </li>
+                    <li class="nav-item"><a href="{{ route('shop.admin.products.index') }}"
+                                            class="nav-link">Товары</a></li>
+                    <li class="nav-item"><a href="{{ route('shop.admin.users') }}"
+                                            class="nav-link">Пользователи</a></li>
+                    <li class="nav-item"><a href="{{ route('shop.admin.orders.index') }}"
+                                            class="nav-link">Заказы</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="col-sm-8">
+            {{-- Content --}}
+            <main class="py-4">
+                @yield('content')
+            </main>
         </div>
     </div>
+</div>
 </div>
 
 

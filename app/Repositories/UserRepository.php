@@ -26,6 +26,17 @@ class UserRepository extends BaseRepository
 
 
     /**
+     * Получить общее количество пользователей
+     *
+     * @return mixed
+     */
+    public function getCount()
+    {
+        return $this->startConditions()->count();
+    }
+
+
+    /**
      * @return mixed|string
      */
     protected function getModelClass()

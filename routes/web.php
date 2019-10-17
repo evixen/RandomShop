@@ -17,18 +17,20 @@ Auth::routes(['verify' => true]);
 Route::group(['namespace' => 'Shop'], function () {
 
     Route::get('/', 'MainController@index')->name('shop.main');
+    Route::get('/orders', 'MainController@orders')->name('shop.orders');
 
     Route::get('/{category}', 'MainController@category')
-        ->where('category', '^((?!admin|cart$|/).)*$')
+        ->where('category', '^((?!admin|orders|cart$|/).)*$')
         ->name('shop.category');
 
     Route::get('/{category}/{slug}', 'MainController@product')
-        ->where('category', '^((?!admin|cart/).)*$')
+        ->where('category', '^((?!admin|orders|cart/).)*$')
         ->name('shop.product');
 
     // Корзина товаров
     Route::get('/cart', 'CartController@index')->name('shop.cart.index');
     Route::put('/cart', 'CartController@add')->name('shop.cart.add');
+    Route::patch('/cart', 'CartController@changeQty')->name('shop.cart.qty');
     Route::delete('/cart/{id}', 'CartController@delete')->name('shop.cart.delete');
     Route::delete('/cart', 'CartController@clean')->name('shop.cart.clean');
     Route::post('/cart/checkout', 'CartController@checkout')->name('shop.cart.checkout');
@@ -70,8 +72,10 @@ Route::group(['namespace' => 'Shop\Admin', 'prefix' => 'admin', 'middleware' => 
     Route::resource('orders', 'OrderController')
         ->only(['index', 'edit', 'update', 'destroy'])
         ->names('shop.admin.orders');
-    Route::get('/orders/deleted', 'OrderController@deleted')
-        ->name('shop.admin.orders.deleted');
+    Route::get('/orders/archived', 'OrderController@archived')
+        ->name('shop.admin.orders.archived');
+    Route::delete('/orders/{id}/archivation', 'OrderController@toArchive')
+        ->name('shop.admin.orders.toArchive');
     Route::get('/orders/{id}/restore', 'OrderController@restore')
         ->name('shop.admin.orders.restore');
 });
