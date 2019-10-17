@@ -1,5 +1,13 @@
 @import 'variables';
 
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 180px;
+}
 
 .row {
     width: 100%;
@@ -284,11 +292,24 @@ ul {
 }
 
 
+/* Footer */
+#footer {
+    width: 100%;
+    height: 180px;
+    position: absolute;
+    bottom: 0;
+}
+
+
 /* Media */
 @media screen and (max-width: 992px) {
     .user-dropdown {
         position: absolute;
         left: -235%;
+    }
+
+    #footer {
+        height: 200px;
     }
 }
 
@@ -296,5 +317,9 @@ ul {
     .user-dropdown {
         position: absolute;
         left: 0;
+    }
+
+    #footer {
+        display: none;
     }
 }
