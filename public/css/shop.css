@@ -93,6 +93,12 @@ ul {
   font-weight: bold;
 }
 
+#second-navbar #snb-right .search-dropdown {
+  min-width: 385px;
+  width: 385px;
+  background-color: #f8fafc;
+}
+
 /* Main */
 
 .product-img {
@@ -277,6 +283,11 @@ ul {
     left: -235%;
   }
 
+  /*.search-dropdown {
+      position: absolute;
+      right: 50%;
+  }*/
+
   #footer {
     height: 200px;
   }
@@ -287,6 +298,11 @@ ul {
     position: absolute;
     left: 0;
   }
+
+  /*.search-dropdown {
+      position: absolute;
+      left: -200px;
+  }*/
 
   #footer {
     display: none;

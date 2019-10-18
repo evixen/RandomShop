@@ -7,7 +7,7 @@
     <i class="material-icons">person</i>
 </a>
 
-<div class="dropdown-menu  p-3 user-dropdown">
+<div class="dropdown-menu p-3 user-dropdown" aria-labelledby="DropdownMenuUser">
     @guest
 
         {{-- Выпадающее меню гостя --}}

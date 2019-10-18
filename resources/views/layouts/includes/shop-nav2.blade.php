@@ -52,10 +52,8 @@
                     </div>
 
                     {{-- Search --}}
-                    <div class="col-sm-3 search">
-                        <a href="#" class="text-dark">
-                            <i class="material-icons">search</i>
-                        </a>
+                    <div class="col-sm-3 dropdown noclose search">
+                        @include('layouts.includes.shop-search')
                     </div>
                 </div>
             </div>

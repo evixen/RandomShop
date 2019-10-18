@@ -1,5 +1,7 @@
 @extends('layouts.shop')
 
+@section('title')Корзина товаров@endsection
+
 @section('content')
 
     @include('Shop.result_messages');

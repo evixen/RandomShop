@@ -1,5 +1,9 @@
 @extends('layouts.shop')
 
+@section('title')
+{{ $categorySlug }}
+@endsection
+
 @section('content')
     <div class="container">
 

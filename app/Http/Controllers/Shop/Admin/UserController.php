@@ -9,7 +9,14 @@ use Illuminate\Http\Request;
 
 class UserController extends AdminBaseController
 {
+    /**
+     * @var UserRepository
+     */
     protected $users;
+
+    /**
+     * @var RoleRepository
+     */
     protected $roles;
 
 

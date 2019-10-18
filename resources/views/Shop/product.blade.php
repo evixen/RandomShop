@@ -33,7 +33,7 @@
                         {{ $product->details }}
                     </div>
                     <div class="card-header">
-                        Цена: <strong class="product-price ml-2">{{ $product->price }}</strong> р.
+                        Цена: <strong class="product-price ml-2">{{ $product->price }}</strong> руб.
                     </div>
                 </div>
                 <form action="{{ route('shop.cart.add') }}" method="post" class="mt-3">
@@ -56,7 +56,7 @@
         </div>
     </div>
 
-    <div class="container see-also">
+    <div class="container see-also mb-4">
         <h3 class="h3 text-center">Товары этой категории</h3>
         <div class="row justify-content-around flex-wrap">
             @foreach ($others as $product)

@@ -22,8 +22,6 @@ class ShopOrderObserver
             $order->products()->attach($product->id,
                 ['quantity' => $product->qty, 'created_at' => $now, 'updated_at' => $now]);
         }
-
-//        \ShoppingCart::destroy();
     }
 
 

@@ -1,5 +1,7 @@
 @extends('layouts.shop')
 
+@section('title')Ваши заказы@endsection
+
 @section('content')
     <div class="container">
         <div class="row justify-content-center">

@@ -54,6 +54,7 @@ class OrderController extends AdminBaseController
         return view('Shop.Admin.orders.edit', compact('order'));
     }
 
+
     /**
      * Update the specified resource in storage.
      *

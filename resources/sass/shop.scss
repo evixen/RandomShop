@@ -113,6 +113,12 @@ ul {
                 font-weight: bold;
             }
         }
+
+        .search-dropdown {
+            min-width: 385px;
+            width: 385px;
+            background-color: $body-bg;
+        }
     }
 
 }
@@ -308,6 +314,11 @@ ul {
         left: -235%;
     }
 
+    /*.search-dropdown {
+        position: absolute;
+        right: 50%;
+    }*/
+
     #footer {
         height: 200px;
     }
@@ -318,6 +329,11 @@ ul {
         position: absolute;
         left: 0;
     }
+
+    /*.search-dropdown {
+        position: absolute;
+        left: -200px;
+    }*/
 
     #footer {
         display: none;
