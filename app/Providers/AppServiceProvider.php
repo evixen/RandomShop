@@ -32,6 +32,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        \Schema::defaultStringLength(191);
+
         ShopProductCategory::observe(ShopProductCategoryObserver::class);
         ShopProduct::observe(ShopProductObserver::class);
         User::observe(UserObserver::class);

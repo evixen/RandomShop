@@ -20,11 +20,11 @@ Route::group(['namespace' => 'Shop'], function () {
     Route::get('/orders', 'MainController@orders')->name('shop.orders');
 
     Route::get('/{category}', 'MainController@category')
-        ->where('category', '^((?!admin|orders|cart$|/).)*$')
+        ->where('category', '^((?!admin|orders|payment|cart$|/).)*$')
         ->name('shop.category');
 
     Route::get('/{category}/{slug}', 'MainController@product')
-        ->where('category', '^((?!admin|orders|cart/).)*$')
+        ->where('category', '^((?!admin|orders|payment|cart/).)*$')
         ->name('shop.product');
 
     // Корзина товаров
@@ -34,7 +34,16 @@ Route::group(['namespace' => 'Shop'], function () {
     Route::delete('/cart/{id}', 'CartController@delete')->name('shop.cart.delete');
     Route::delete('/cart', 'CartController@clean')->name('shop.cart.clean');
     Route::post('/cart/checkout', 'CartController@checkout')->name('shop.cart.checkout');
-    Route::get('/cart/payment/{orderId}', 'CartController@payment')->name('shop.cart.payment');
+
+    // Webmoney
+    Route::get('/payment/{id}', 'PaymentController@webmoney')->name('shop.payment.webmoney');
+    Route::post('/M4mhQACA', 'PaymentController@result')->name('webmoney.result');
+    Route::post('/payment/success', function () {
+        return view('Shop.success');
+    });
+    Route::post('/payment/fail', function () {
+        return view('Shop.fail');
+    });
 
 });
 

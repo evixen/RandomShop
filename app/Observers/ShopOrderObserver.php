@@ -32,9 +32,6 @@ class ShopOrderObserver
      */
     public function updating(ShopOrder $order)
     {
-        // Если чекбокс оплаты отмечен - переносим заказ в архивные
-        if ($order->is_paid != false) {
-            $order->deleted_at = Carbon::now();
-        }
+
     }
 }

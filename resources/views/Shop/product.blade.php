@@ -33,7 +33,7 @@
                         {{ $product->details }}
                     </div>
                     <div class="card-header">
-                        Цена: <strong class="product-price ml-2">{{ $product->price }}</strong> руб.
+                        Цена: <strong class="product-server price ml-2">{{ $product->price }}</strong> руб.
                     </div>
                 </div>
                 <form action="{{ route('shop.cart.add') }}" method="post" class="mt-3">

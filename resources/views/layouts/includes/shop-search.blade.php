@@ -9,7 +9,7 @@
 
 <div class="dropdown-menu dropdown-menu-right p-3 search-dropdown" aria-labelledby="DropdownMenuSearch">
     <div class="aa-input-container" id="aa-input-container">
-        <input type="search" id="aa-search-input" class="aa-input-search" placeholder="Поиск по товарам"
+        <input type="search" id="aa-search-input" class="aa-input-search" placeholder="Поиск товаров"
                name="search" autocomplete="off"/>
         <svg class="aa-input-icon" viewBox="654 -372 1664 1664">
             <path

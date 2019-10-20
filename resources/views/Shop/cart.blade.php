@@ -88,7 +88,7 @@
                                            class="form-control"
                                            id="receiver_name"
                                            name="receiver_name"
-                                           @if(Auth::check())
+                                           @if(Auth::check() AND $lastOrder != false)
                                            value="{{ $lastOrder->receiver_name }}"
                                            @endif
                                            required>
@@ -116,7 +116,7 @@
                                            class="form-control"
                                            id="phone"
                                            name="phone"
-                                           @if(Auth::check())
+                                           @if(Auth::check() AND $lastOrder != false)
                                            value="{{ $lastOrder->phone }}"
                                            @endif
                                            required>
@@ -128,7 +128,7 @@
                                            class="form-control"
                                            id="address"
                                            name="address"
-                                           @if(Auth::check())
+                                           @if(Auth::check() AND $lastOrder != false)
                                            value="{{ $lastOrder->address }}"
                                            @endif
                                            required>

@@ -102,6 +102,7 @@ class ShopOrderRepository extends BaseRepository
             ->select($columns)
             ->where('deleted_at', '!=', null)
             ->withTrashed()
+            ->orderBy('id', 'DESC')
             ->paginate(10);
 
         return $result;
@@ -143,6 +144,40 @@ class ShopOrderRepository extends BaseRepository
             ->first();
 
         return $result;
+    }
+
+
+    /**
+     * Получить заказ по его коду
+     *
+     * @param $orderId
+     * @return mixed
+     */
+    public function getByOrderId($orderId)
+    {
+        $result = $this
+            ->startConditions()
+            ->where('order_id', $orderId)
+            ->first();
+
+        return $result;
+    }
+
+
+    /**
+     * Получить id последнего сохраненного заказа
+     *
+     * @return mixed
+     */
+    public function getLastOrderId()
+    {
+        $order = $this
+            ->startConditions()
+            ->select('id')
+            ->latest()
+            ->first();
+
+        return $order->id;
     }
 
 

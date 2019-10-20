@@ -4,7 +4,7 @@
             <div class="col-sm-5">
                 <ul class="navbar-nav d-flex flex-column align-items-start">
                     <li class="nav-item">
-                        <img src="/img/logo.png" alt="img" style="max-height: 60px" class="navbar-brand img-fluid">
+                        <img src="/img/logo-footer.png" alt="img" style="max-height: 60px" class="navbar-brand img-fluid">
                     </li>
                     <li class="nav-item text-light">
                         <div>Интернет магазин Random Shop</div>

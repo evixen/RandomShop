@@ -153,8 +153,6 @@ class OrderController extends AdminBaseController
 
         $order->deleted_at = null;
 
-        $order->is_paid = false;
-
         if ($order->save()) {
             return redirect()
                 ->route('shop.admin.orders.edit', $order->id)

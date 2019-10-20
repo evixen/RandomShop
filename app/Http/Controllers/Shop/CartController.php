@@ -124,25 +124,20 @@ class CartController extends GuestBaseController
         $data['created_at'] = $now;
         $data['updated_at'] = $now;
 
-
         // Сохраняем данные
         $order = new ShopOrder($data);
 
         $result = $order->save();
 
         if ($result) {
+            $id = $this->orders->getLastOrderId();
+
             return redirect()
-                ->route('shop.cart.payment', $data['order_id']);
+                ->route('shop.payment.webmoney', $id);
         } else {
             return back()
                 ->withErrors(['msg' => "Ошибка сохранения"])
                 ->withInput();
         }
-    }
-
-
-    public function payment($orderId)
-    {
-        return view('Shop.payment');
     }
 }
