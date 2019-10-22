@@ -121,6 +121,7 @@ class ShopOrderRepository extends BaseRepository
             ->startConditions()
             ->with('products:id,name')
             ->where('email', $email)
+            ->withTrashed()
             ->orderBy('id', 'desc')
             ->get();
 

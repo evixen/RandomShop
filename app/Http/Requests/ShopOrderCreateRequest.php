@@ -26,8 +26,7 @@ class ShopOrderCreateRequest extends FormRequest
         return [
             'receiver_name' => 'required|min:4|max:200',
 
-            // TODO после тестов заменить проверку ввода емейла
-            'email' => 'required',
+            'email' => 'required|email',
             'phone' => 'required|min:10|max:12',
             'address' => 'required|min:10|max:400',
         ];
